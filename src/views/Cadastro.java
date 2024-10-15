@@ -41,6 +41,7 @@ public class Cadastro extends javax.swing.JFrame {
         DefaultTableModel tbClientes = (DefaultTableModel) jTableClientes.getModel();
         tbCliente.ResultadoFiltro();
         tbEndereco.FiltroEndereco();
+        txtNomeCliente.requestFocus();
 
         //txtCodCliente.setText(txtCodCliente);
         /*txtStatus.setText("Ativo");
@@ -362,9 +363,15 @@ public class Cadastro extends javax.swing.JFrame {
 
         txtNomeCliente.setToolTipText("Informe o nome do Cliente");
         txtNomeCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtNomeCliente.setNextFocusableComponent(txtApelido);
         txtNomeCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeClienteActionPerformed(evt);
+            }
+        });
+        txtNomeCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeClienteKeyPressed(evt);
             }
         });
         jPanel1.add(txtNomeCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, 400, 30));
@@ -380,6 +387,11 @@ public class Cadastro extends javax.swing.JFrame {
         txtApelido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApelidoActionPerformed(evt);
+            }
+        });
+        txtApelido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApelidoKeyPressed(evt);
             }
         });
         jPanel1.add(txtApelido, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 30, 90, 30));
@@ -433,6 +445,11 @@ public class Cadastro extends javax.swing.JFrame {
                 txtNomeMaeActionPerformed(evt);
             }
         });
+        txtNomeMae.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeMaeKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtNomeMae, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 420, 30));
 
         lblCartaoSUS.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
@@ -458,6 +475,11 @@ public class Cadastro extends javax.swing.JFrame {
         txtNomePai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomePaiActionPerformed(evt);
+            }
+        });
+        txtNomePai.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomePaiKeyPressed(evt);
             }
         });
         jPanel1.add(txtNomePai, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 420, 30));
@@ -493,6 +515,11 @@ public class Cadastro extends javax.swing.JFrame {
                 jTextAreaOBSMouseClicked(evt);
             }
         });
+        jTextAreaOBS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextAreaOBSKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextAreaOBS);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 520, 80));
@@ -507,6 +534,11 @@ public class Cadastro extends javax.swing.JFrame {
         txtEndereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEnderecoActionPerformed(evt);
+            }
+        });
+        txtEndereco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEnderecoKeyPressed(evt);
             }
         });
         jPanel1.add(txtEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 720, 30));
@@ -524,6 +556,11 @@ public class Cadastro extends javax.swing.JFrame {
                 txtBairroActionPerformed(evt);
             }
         });
+        txtBairro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBairroKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 250, 30));
 
         lblComplemento.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
@@ -539,6 +576,11 @@ public class Cadastro extends javax.swing.JFrame {
                 txtComplementoActionPerformed(evt);
             }
         });
+        txtComplemento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtComplementoKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, 250, 30));
 
         lblCidade.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
@@ -552,6 +594,11 @@ public class Cadastro extends javax.swing.JFrame {
         txtCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCidadeActionPerformed(evt);
+            }
+        });
+        txtCidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCidadeKeyPressed(evt);
             }
         });
         jPanel1.add(txtCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 400, 140, 30));
@@ -580,6 +627,7 @@ public class Cadastro extends javax.swing.JFrame {
         btnSalvarCadastro.setBackground(new java.awt.Color(0, 115, 190));
         btnSalvarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diskete.png"))); // NOI18N
         btnSalvarCadastro.setToolTipText("Salvando as Informações");
+        btnSalvarCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSalvarCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarCadastroActionPerformed(evt);
@@ -590,6 +638,7 @@ public class Cadastro extends javax.swing.JFrame {
         btnSaida1.setBackground(new java.awt.Color(0, 115, 190));
         btnSaida1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/saida.png"))); // NOI18N
         btnSaida1.setToolTipText("Saindo do Cadastro");
+        btnSaida1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSaida1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaida1ActionPerformed(evt);
@@ -600,6 +649,7 @@ public class Cadastro extends javax.swing.JFrame {
         btnAtualizarCadastro.setBackground(new java.awt.Color(0, 115, 190));
         btnAtualizarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/atulizar.png"))); // NOI18N
         btnAtualizarCadastro.setToolTipText("Atualizar");
+        btnAtualizarCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAtualizarCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAtualizarCadastroMouseClicked(evt);
@@ -615,6 +665,7 @@ public class Cadastro extends javax.swing.JFrame {
         btnProximo.setBackground(new java.awt.Color(0, 115, 190));
         btnProximo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/proximo.png"))); // NOI18N
         btnProximo.setToolTipText("Proximo Cadastro");
+        btnProximo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProximoActionPerformed(evt);
@@ -627,6 +678,12 @@ public class Cadastro extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCPF.setToolTipText("CPF");
+        txtCPF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCPFKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, 110, 30));
 
         try {
@@ -634,22 +691,40 @@ public class Cadastro extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCEP.setToolTipText("CEP");
         txtCEP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCEPActionPerformed(evt);
             }
         });
+        txtCEP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCEPKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtCEP, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 120, 30));
 
         txtCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("(81)9-####-####"))));
+        txtCelular.setToolTipText("Celular");
         txtCelular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCelularActionPerformed(evt);
             }
         });
+        txtCelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCelularKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 120, 30));
 
         txtCelular_Whatsapp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("(81)9-####-####"))));
+        txtCelular_Whatsapp.setToolTipText("Whatsap");
+        txtCelular_Whatsapp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCelular_WhatsappKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtCelular_Whatsapp, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 120, 30));
 
         try {
@@ -657,6 +732,12 @@ public class Cadastro extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtTituloEleitoral.setToolTipText("Titulo Eleitoral");
+        txtTituloEleitoral.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTituloEleitoralKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtTituloEleitoral, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 160, 140, -1));
 
         try {
@@ -664,6 +745,12 @@ public class Cadastro extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtSecaoEleitoral.setToolTipText("Seção Eleitoral");
+        txtSecaoEleitoral.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSecaoEleitoralKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtSecaoEleitoral, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 210, 90, -1));
 
         try {
@@ -671,11 +758,18 @@ public class Cadastro extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtZonaEleitoral.setToolTipText("Zona Eleitoral");
+        txtZonaEleitoral.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtZonaEleitoralKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtZonaEleitoral, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 80, -1));
 
         btnAnterior1.setBackground(new java.awt.Color(0, 115, 190));
         btnAnterior1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/anterior.png"))); // NOI18N
         btnAnterior1.setToolTipText("Cadastro Anterior");
+        btnAnterior1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAnterior1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnterior1ActionPerformed(evt);
@@ -688,6 +782,12 @@ public class Cadastro extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtCartaoSus.setToolTipText("Cartão SUS");
+        txtCartaoSus.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCartaoSusKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtCartaoSus, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, 140, -1));
 
         try {
@@ -695,12 +795,30 @@ public class Cadastro extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtRG.setToolTipText("RG - Identidade");
+        txtRG.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRGKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtRG, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 100, 110, 30));
 
         txtDataCadastro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        txtDataCadastro.setToolTipText("Data do Cadastro");
+        txtDataCadastro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDataCadastroKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtDataCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 120, -1));
 
         txtDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("##-##-####"))));
+        txtDataNasc.setToolTipText("Data Nascimento");
+        txtDataNasc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDataNascKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtDataNasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 90, -1));
 
         jComboBoxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione,", "Casado(a),", "Solteiro(a),", "Viúvo(a),", "Divorciado(a)" }));
@@ -709,11 +827,17 @@ public class Cadastro extends javax.swing.JFrame {
                 jComboBoxEstadoCivilActionPerformed(evt);
             }
         });
+        jComboBoxEstadoCivil.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jComboBoxEstadoCivilKeyPressed(evt);
+            }
+        });
         jPanel1.add(jComboBoxEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, -1, -1));
 
         btnImprimir.setBackground(new java.awt.Color(0, 115, 190));
         btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/imprimir.png"))); // NOI18N
-        btnImprimir.setToolTipText("Saindo do Cadastro");
+        btnImprimir.setToolTipText("Imprimir");
+        btnImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImprimirActionPerformed(evt);
@@ -1275,6 +1399,7 @@ codigo anterior antes do acima
 
     private void txtCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCelularActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtCelularActionPerformed
 
     private void jTextAreaOBSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaOBSMouseClicked
@@ -1285,6 +1410,153 @@ codigo anterior antes do acima
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnImprimirActionPerformed
+
+    private void txtNomeClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeClienteKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtApelido.requestFocus();
+        }
+    }//GEN-LAST:event_txtNomeClienteKeyPressed
+
+    private void txtApelidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApelidoKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtCelular.requestFocus();
+        }
+    }//GEN-LAST:event_txtApelidoKeyPressed
+
+    private void txtCelularKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtCelular_Whatsapp.requestFocus();
+        }
+    }//GEN-LAST:event_txtCelularKeyPressed
+
+    private void txtCelular_WhatsappKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelular_WhatsappKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtDataNasc.requestFocus();
+        }
+    }//GEN-LAST:event_txtCelular_WhatsappKeyPressed
+
+    private void txtDataNascKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataNascKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            jComboBoxEstadoCivil.requestFocus();
+        }
+    }//GEN-LAST:event_txtDataNascKeyPressed
+
+    private void jComboBoxEstadoCivilKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBoxEstadoCivilKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtCPF.requestFocus();
+        }
+    }//GEN-LAST:event_jComboBoxEstadoCivilKeyPressed
+
+    private void txtCPFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtRG.requestFocus();
+        }
+    }//GEN-LAST:event_txtCPFKeyPressed
+
+    private void txtRGKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRGKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtNomeMae.requestFocus();
+        }
+    }//GEN-LAST:event_txtRGKeyPressed
+
+    private void txtNomeMaeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeMaeKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtNomePai.requestFocus();
+        }
+    }//GEN-LAST:event_txtNomeMaeKeyPressed
+
+    private void txtNomePaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomePaiKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtCartaoSus.requestFocus();
+        }
+    }//GEN-LAST:event_txtNomePaiKeyPressed
+
+    private void txtCartaoSusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCartaoSusKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtTituloEleitoral.requestFocus();
+        }
+    }//GEN-LAST:event_txtCartaoSusKeyPressed
+
+    private void txtTituloEleitoralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloEleitoralKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtZonaEleitoral.requestFocus();
+        }
+    }//GEN-LAST:event_txtTituloEleitoralKeyPressed
+
+    private void txtZonaEleitoralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtZonaEleitoralKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtSecaoEleitoral.requestFocus();
+        }
+    }//GEN-LAST:event_txtZonaEleitoralKeyPressed
+
+    private void txtSecaoEleitoralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSecaoEleitoralKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtDataCadastro.requestFocus();
+        }
+    }//GEN-LAST:event_txtSecaoEleitoralKeyPressed
+
+    private void txtDataCadastroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataCadastroKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            jTextAreaOBS.requestFocus();
+        }
+    }//GEN-LAST:event_txtDataCadastroKeyPressed
+
+    private void jTextAreaOBSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaOBSKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtEndereco.requestFocus();
+        }
+    }//GEN-LAST:event_jTextAreaOBSKeyPressed
+
+    private void txtEnderecoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnderecoKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtBairro.requestFocus();
+        }
+    }//GEN-LAST:event_txtEnderecoKeyPressed
+
+    private void txtBairroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBairroKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtComplemento.requestFocus();
+        }
+    }//GEN-LAST:event_txtBairroKeyPressed
+
+    private void txtComplementoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComplementoKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtCidade.requestFocus();
+        }
+    }//GEN-LAST:event_txtComplementoKeyPressed
+
+    private void txtCidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidadeKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtCEP.requestFocus();
+        }
+    }//GEN-LAST:event_txtCidadeKeyPressed
+
+    private void txtCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCEPKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            txtUF.requestFocus();
+        }
+    }//GEN-LAST:event_txtCEPKeyPressed
 
     /**
      * @param args the command line arguments

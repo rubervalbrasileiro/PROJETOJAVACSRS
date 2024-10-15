@@ -30,6 +30,25 @@ import models.Endereco;
         }
     }
 
+    // Método para converter a primeira letra de cada palavra em maiúscula
+    public String capitalizarCliente(String cliente) {
+        // Divide o texto em palavras usando espaço como delimitador
+        String[] palavras = cliente.split(" ");
+        StringBuilder produtoFormatado = new StringBuilder();
+
+        // Converte a primeira letra de cada palavra para maiúscula
+        for (String palavra : palavras) {
+            if (palavra.length() > 0) {
+                produtoFormatado.append(palavra.substring(0, 1).toUpperCase())
+                        .append(palavra.substring(1).toLowerCase())
+                        .append(" ");
+            }
+        }
+
+        // Remove o espaço extra no final e retorna o resultado
+        return produtoFormatado.toString().trim();
+    }
+    
    public boolean atualizarCliente(Cliente cliente, Endereco endereco) {
     String sqlCliente = "UPDATE cliente SET cod_cliente = ?, status_cliente = ?, nome_cliente = ?, apelido_cliente = ?, celular = ?, celular_whatsapp = ?, data_nasc = ?, estado_civil = ?, nome_mae = ?, nome_pai = ?, cpf_cliente = ?, rg_cliente = ?, cartao_sus = ?, titulo_eleitoral = ?, secao_eleitoral = ?, zona_eleitoral = ?, data_cadastro = ?, observacao = ? WHERE id_cliente = ?";
     
