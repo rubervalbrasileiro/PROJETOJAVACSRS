@@ -178,6 +178,7 @@ public class Cadastro extends javax.swing.JFrame {
         txtDataCadastro = new javax.swing.JFormattedTextField();
         txtDataNasc = new javax.swing.JFormattedTextField();
         jComboBoxEstadoCivil = new javax.swing.JComboBox<>();
+        btnImprimir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableClientes = new javax.swing.JTable();
@@ -594,7 +595,7 @@ public class Cadastro extends javax.swing.JFrame {
                 btnSaida1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSaida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 440, 50, 40));
+        jPanel1.add(btnSaida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 440, 50, 40));
 
         btnAtualizarCadastro.setBackground(new java.awt.Color(0, 115, 190));
         btnAtualizarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/atulizar.png"))); // NOI18N
@@ -709,6 +710,16 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jComboBoxEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, -1, -1));
+
+        btnImprimir.setBackground(new java.awt.Color(0, 115, 190));
+        btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/imprimir.png"))); // NOI18N
+        btnImprimir.setToolTipText("Saindo do Cadastro");
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 440, 50, 40));
 
         jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1271,6 +1282,10 @@ codigo anterior antes do acima
       
     }//GEN-LAST:event_jTextAreaOBSMouseClicked
 
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnImprimirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1315,6 +1330,7 @@ codigo anterior antes do acima
     private javax.swing.JButton btnFiltro;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnImpressao;
+    private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnOutros;
     private javax.swing.JButton btnProximo;
     private javax.swing.JButton btnRelatorio;
