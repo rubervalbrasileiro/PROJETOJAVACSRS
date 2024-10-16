@@ -7,6 +7,8 @@ package views;
 import conexaoBD.Conexao;
 import conexaoBD.ClienteDAO;
 import conexaoBD.EnderecoDAO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import models.Cliente;
@@ -180,6 +182,7 @@ public class Cadastro extends javax.swing.JFrame {
         txtDataNasc = new javax.swing.JFormattedTextField();
         jComboBoxEstadoCivil = new javax.swing.JComboBox<>();
         btnImprimir = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableClientes = new javax.swing.JTable();
@@ -567,7 +570,7 @@ public class Cadastro extends javax.swing.JFrame {
         lblComplemento.setForeground(new java.awt.Color(255, 255, 255));
         lblComplemento.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblComplemento.setText("Complemento: Apt, Casa, Sítio,  Etapa");
-        jPanel1.add(lblComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, 230, -1));
+        jPanel1.add(lblComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, 230, -1));
 
         txtComplemento.setToolTipText("Complemento");
         txtComplemento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -581,7 +584,7 @@ public class Cadastro extends javax.swing.JFrame {
                 txtComplementoKeyPressed(evt);
             }
         });
-        jPanel1.add(txtComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, 250, 30));
+        jPanel1.add(txtComplemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 400, 300, 30));
 
         lblCidade.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         lblCidade.setForeground(new java.awt.Color(255, 255, 255));
@@ -633,7 +636,7 @@ public class Cadastro extends javax.swing.JFrame {
                 btnSalvarCadastroActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalvarCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 440, 60, 40));
+        jPanel1.add(btnSalvarCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 440, 60, 40));
 
         btnSaida1.setBackground(new java.awt.Color(0, 115, 190));
         btnSaida1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/saida.png"))); // NOI18N
@@ -644,7 +647,7 @@ public class Cadastro extends javax.swing.JFrame {
                 btnSaida1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSaida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 440, 50, 40));
+        jPanel1.add(btnSaida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 440, 50, 40));
 
         btnAtualizarCadastro.setBackground(new java.awt.Color(0, 115, 190));
         btnAtualizarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/atulizar.png"))); // NOI18N
@@ -671,7 +674,7 @@ public class Cadastro extends javax.swing.JFrame {
                 btnProximoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnProximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 440, 50, 40));
+        jPanel1.add(btnProximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, 50, 40));
 
         try {
             txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-###.###-##")));
@@ -775,7 +778,7 @@ public class Cadastro extends javax.swing.JFrame {
                 btnAnterior1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAnterior1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 50, 40));
+        jPanel1.add(btnAnterior1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 50, 40));
 
         try {
             txtCartaoSus.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-####-####-####")));
@@ -843,7 +846,17 @@ public class Cadastro extends javax.swing.JFrame {
                 btnImprimirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 440, 50, 40));
+        jPanel1.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 440, 50, 40));
+
+        btnLimpar.setBackground(new java.awt.Color(0, 115, 190));
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Limpar.png"))); // NOI18N
+        btnLimpar.setToolTipText("Botão Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 440, 60, 40));
 
         jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1214,7 +1227,7 @@ codigo anterior antes do acima
     }                        
         
          */
-
+        
     }//GEN-LAST:event_btnAtualizarCadastroActionPerformed
 
     private void btnSalvarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarCadastroActionPerformed
@@ -1409,6 +1422,62 @@ codigo anterior antes do acima
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
         // TODO add your handling code here:
+        btnImprimir.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int opcao = JOptionPane.showOptionDialog(null, 
+                "Você deseja imprimir a tabela inteira ou apenas a linha selecionada?", 
+                "Escolha uma opção", 
+                JOptionPane.YES_NO_CANCEL_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                new String[]{"Imprimir Tabela Inteira", "Imprimir Linha Selecionada", "Cancelar"}, 
+                "Imprimir Tabela Inteira");
+            
+            if (opcao == 0) {
+                // Imprimir a tabela inteira
+                try {
+                    boolean complete = jTableClientes.print();
+                    if (complete) {
+                        JOptionPane.showMessageDialog(null, "Impressão da tabela concluída com sucesso!", "Imprimir", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Impressão cancelada!", "Imprimir", JOptionPane.WARNING_MESSAGE);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            } else if (opcao == 1) {
+                // Imprimir a linha selecionada
+                int selectedRow = jTableClientes.getSelectedRow();
+                if (selectedRow != -1) {
+                    try {
+                        // Capturar dados da linha selecionada
+                        StringBuilder linhaDados = new StringBuilder();
+                        for (int i = 0; i < jTableClientes.getColumnCount(); i++) {
+                            String columnName = jTableClientes.getColumnName(i);
+                            String cellData = jTableClientes.getValueAt(selectedRow, i).toString();
+                            linhaDados.append(columnName).append(": ").append(cellData).append("\n");
+                        }
+                        
+                        // Mostrar os dados da linha antes de imprimir (opcional)
+                        JOptionPane.showMessageDialog(null, linhaDados.toString(), "Dados da Linha Selecionada", JOptionPane.INFORMATION_MESSAGE);
+                        
+                        // Agora, imprimir esses dados
+                        boolean complete = jTableClientes.print();
+                        if (complete) {
+                            JOptionPane.showMessageDialog(null, "Impressão da linha selecionada concluída com sucesso!", "Imprimir", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Impressão cancelada!", "Imprimir", JOptionPane.WARNING_MESSAGE);
+                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Nenhuma linha selecionada!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    });
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void txtNomeClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeClienteKeyPressed
@@ -1558,6 +1627,12 @@ codigo anterior antes do acima
         }
     }//GEN-LAST:event_txtCEPKeyPressed
 
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+        limparCampos();
+        txtNomeCliente.requestFocus();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1603,6 +1678,7 @@ codigo anterior antes do acima
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnImpressao;
     private javax.swing.JButton btnImprimir;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnOutros;
     private javax.swing.JButton btnProximo;
     private javax.swing.JButton btnRelatorio;
@@ -1684,6 +1760,11 @@ codigo anterior antes do acima
         txtZonaEleitoral.setText("");
         txtDataCadastro.setText("");
         txtEndereco.setText("");
+        txtCEP.setText("");
+        txtUF.setText("");
+        txtComplemento.setText("");
+        txtBairro.setText("");
+        txtCidade.setText("");
     }
 
     // Declarando o JComboBox do estado civil
