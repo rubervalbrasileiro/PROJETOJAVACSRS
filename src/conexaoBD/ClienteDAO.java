@@ -372,7 +372,7 @@ public class ClienteDAO {
                 cliente.setNome_Cliente(rs.getString("nome_Cliente"));
                 cliente.setApelido_Cliente(rs.getString("apelido_Cliente"));
                 cliente.setCelular(rs.getString("celular"));
-                cliente.setCelular_Whatsapp(rs.getString("celular_Whatsasap"));
+                cliente.setCelular_Whatsapp(rs.getString("celular_Whatsapp"));
                 cliente.setData_Nasc(rs.getString("data_Nasc"));
                 cliente.setEstado_Civil(rs.getString("estado_Civil"));
                 cliente.setNome_Mae(rs.getString("nome_Mae"));

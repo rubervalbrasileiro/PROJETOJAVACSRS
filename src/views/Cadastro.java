@@ -912,7 +912,7 @@ public class Cadastro extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1668,6 +1668,31 @@ codigo anterior antes do acima
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         // TODO add your handling code here:
+        int selectedRow = jTableClientes.getSelectedRow();
+        
+        if (selectedRow == -1){
+            JOptionPane.showMessageDialog(null, "Por favor selecione um linha para ser excluída! ");
+            return;
+        }
+        
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Você deseja realmente EXCLUIR o registro selecionado? ",
+                "Confimação de Exclusão", JOptionPane.YES_NO_CANCEL_OPTION);
+        
+        if(confirmacao != JOptionPane.YES_OPTION){
+            JOptionPane.showMessageDialog(null, "Exclusão cancelada! ");
+            return;
+        }
+        
+        int id = Integer.parseInt(jTableClientes.getValueAt(jTableClientes.getSelectedRow(), 0).toString());
+        
+        ClienteDAO clienteDAO = new ClienteDAO();
+        clienteDAO.inativarCliente(id);
+        carregarDadosCliente(id);
+        JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso! ");
+        limparCampos();
+        
+       
+        
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
