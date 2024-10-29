@@ -69,7 +69,7 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBackground(new java.awt.Color(140, 197, 61));
         jPanel5.setMaximumSize(new java.awt.Dimension(400, 600));
         jPanel5.setMinimumSize(new java.awt.Dimension(400, 600));
         jPanel5.setPreferredSize(new java.awt.Dimension(400, 600));
@@ -77,8 +77,9 @@ public class TelaLogin extends javax.swing.JFrame {
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logoRSRS.png"))); // NOI18N
         lblLogo.setToolTipText("Logo do Centro Sociar");
+        lblLogo.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 0, 0)));
         lblLogo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel5.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 420, 320));
+        jPanel5.add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 410, 290));
 
         jPanel1.setBackground(new java.awt.Color(140, 197, 61));
 

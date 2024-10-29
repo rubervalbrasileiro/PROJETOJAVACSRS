@@ -49,7 +49,7 @@ public class Cadastro extends javax.swing.JFrame {
         /*txtStatus.setText("Ativo");
         txtCidade.setText("Olinda");
         txtUF.setText("PE");
-*/
+         */
     }
 
     private void carregarDadosCliente(int idCliente) {
@@ -1044,7 +1044,7 @@ public class Cadastro extends javax.swing.JFrame {
                         + "JOIN endereco e ON c.id_endereco = e.id_endereco";
 
                 ResultSet rs = st.executeQuery(sql);
- 
+
                 // Adicionar os resultados na jTableCliente
                 while (rs.next()) {
                     Object[] dados = {
@@ -1076,52 +1076,51 @@ public class Cadastro extends javax.swing.JFrame {
                     };
                     tabCliente.addRow(dados);
                 }
-                
+
                 jTableClientes.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent event) {
-                if (!event.getValueIsAdjusting()) {
-                    int selectedRow = jTableClientes.getSelectedRow();
-                    if (selectedRow != -1) {
-                        // Preencher os campos com os dados da linha selecionada
-                        txtCodCliente.setText(jTableClientes.getValueAt(selectedRow, 0).toString());
-                        txtStatus.setText(jTableClientes.getValueAt(selectedRow, 1).toString());
-                        txtNomeCliente.setText(jTableClientes.getValueAt(selectedRow, 2).toString());
-                        txtApelido.setText(jTableClientes.getValueAt(selectedRow, 3).toString());
-                        txtCelular.setText(jTableClientes.getValueAt(selectedRow, 4).toString());
-                        txtCelular_Whatsapp.setText(jTableClientes.getValueAt(selectedRow, 5).toString());
-                        txtDataNasc.setText(jTableClientes.getValueAt(selectedRow, 6).toString());
-                        // Definir valor padrão no JComboBox se estiver vazio
-                        jComboBoxEstadoCivil.setSelectedItem(jTableClientes.getValueAt(selectedRow, 7).toString());
-                        /*if (jComboBoxEstadoCivil.getSelectedItem() == null) {
+                    @Override
+                    public void valueChanged(ListSelectionEvent event) {
+                        if (!event.getValueIsAdjusting()) {
+                            int selectedRow = jTableClientes.getSelectedRow();
+                            if (selectedRow != -1) {
+                                // Preencher os campos com os dados da linha selecionada
+                                txtCodCliente.setText(jTableClientes.getValueAt(selectedRow, 0).toString());
+                                txtStatus.setText(jTableClientes.getValueAt(selectedRow, 1).toString());
+                                txtNomeCliente.setText(jTableClientes.getValueAt(selectedRow, 2).toString());
+                                txtApelido.setText(jTableClientes.getValueAt(selectedRow, 3).toString());
+                                txtCelular.setText(jTableClientes.getValueAt(selectedRow, 4).toString());
+                                txtCelular_Whatsapp.setText(jTableClientes.getValueAt(selectedRow, 5).toString());
+                                txtDataNasc.setText(jTableClientes.getValueAt(selectedRow, 6).toString());
+                                // Definir valor padrão no JComboBox se estiver vazio
+                                jComboBoxEstadoCivil.setSelectedItem(jTableClientes.getValueAt(selectedRow, 7).toString());
+                                /*if (jComboBoxEstadoCivil.getSelectedItem() == null) {
                             jComboBoxEstadoCivil.setSelectedIndex(0);  // Seleciona o primeiro item por padrão
                         }*/
-                        txtNomeMae.setText(jTableClientes.getValueAt(selectedRow, 8).toString());
-                        txtNomePai.setText(jTableClientes.getValueAt(selectedRow, 9).toString());
-                        txtCPF.setText(jTableClientes.getValueAt(selectedRow, 10).toString());
-                        txtRG.setText(jTableClientes.getValueAt(selectedRow, 11).toString());
-                        txtCartaoSus.setText(jTableClientes.getValueAt(selectedRow, 12).toString());
-                        txtTituloEleitoral.setText(jTableClientes.getValueAt(selectedRow, 13).toString());
-                        txtSecaoEleitoral.setText(jTableClientes.getValueAt(selectedRow, 14).toString());
-                        txtZonaEleitoral.setText(jTableClientes.getValueAt(selectedRow, 15).toString());
-                        txtDataCadastro.setText(jTableClientes.getValueAt(selectedRow, 16).toString());
-                        String observacao = jTextAreaOBS.getText().toString();
+                                txtNomeMae.setText(jTableClientes.getValueAt(selectedRow, 8).toString());
+                                txtNomePai.setText(jTableClientes.getValueAt(selectedRow, 9).toString());
+                                txtCPF.setText(jTableClientes.getValueAt(selectedRow, 10).toString());
+                                txtRG.setText(jTableClientes.getValueAt(selectedRow, 11).toString());
+                                txtCartaoSus.setText(jTableClientes.getValueAt(selectedRow, 12).toString());
+                                txtTituloEleitoral.setText(jTableClientes.getValueAt(selectedRow, 13).toString());
+                                txtSecaoEleitoral.setText(jTableClientes.getValueAt(selectedRow, 14).toString());
+                                txtZonaEleitoral.setText(jTableClientes.getValueAt(selectedRow, 15).toString());
+                                txtDataCadastro.setText(jTableClientes.getValueAt(selectedRow, 16).toString());
+                                String observacao = jTextAreaOBS.getText().toString();
 ////                        jTextAreaOBS.setText(jTextAreaOBS.getText());
 
-                        // Preencher os campos de endereço
-                        txtEndereco.setText(jTableClientes.getValueAt(selectedRow, 19).toString());
-                        txtBairro.setText(jTableClientes.getValueAt(selectedRow, 20).toString());
-                        txtComplemento.setText(jTableClientes.getValueAt(selectedRow, 21).toString());
-                        txtCidade.setText(jTableClientes.getValueAt(selectedRow, 22).toString());
-                        txtCEP.setText(jTableClientes.getValueAt(selectedRow, 23).toString());
-                        txtUF.setText(jTableClientes.getValueAt(selectedRow, 24).toString());
+                                // Preencher os campos de endereço
+                                txtEndereco.setText(jTableClientes.getValueAt(selectedRow, 19).toString());
+                                txtBairro.setText(jTableClientes.getValueAt(selectedRow, 20).toString());
+                                txtComplemento.setText(jTableClientes.getValueAt(selectedRow, 21).toString());
+                                txtCidade.setText(jTableClientes.getValueAt(selectedRow, 22).toString());
+                                txtCEP.setText(jTableClientes.getValueAt(selectedRow, 23).toString());
+                                txtUF.setText(jTableClientes.getValueAt(selectedRow, 24).toString());
+                            }
+                        }
                     }
                 }
-            }
-        }
-        );
-                
-                
+                );
+
             } catch (SQLException e) {
                 System.out.println("Erro ao realizar consulta: " + e.getMessage());
             } finally {
@@ -1131,8 +1130,14 @@ public class Cadastro extends javax.swing.JFrame {
         } else {
             System.out.println("Não foi possível conectar ao banco de dados.");
         }
-        
 
+        String nome = txtNomeCliente.getText() ;
+        nome = capitalizarCliente(nome);
+        
+        ClienteDAO addCli = new ClienteDAO();
+        //addCli.adicionarCliente(cliente, endereco);
+        
+        
         // Obter o ID do cliente selecionado
         /*
          // TODO add your handling code here: Atualizar os campos
@@ -1227,51 +1232,65 @@ codigo anterior antes do acima
     }                        
         
          */
-        
+
     }//GEN-LAST:event_btnAtualizarCadastroActionPerformed
 
     private void btnSalvarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarCadastroActionPerformed
-
         // TODO add your handling code here: Salvar no banco de dados
+        String nome = txtNomeCliente.getText().trim();
+        String cpf = txtCPF.getText().trim();
+
+        if (nome.isEmpty() || cpf.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor informe os Campos obrigatórios\n Nome e o CPF:", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        nome = capitalizarCliente(nome);
+     
+        ClienteDAO clienteDAO = new ClienteDAO();
+       Cliente clienteExistente = clienteDAO.verificarExistencia(cpf, nome);
+       if(clienteExistente != null){
+        // ClienteDAO.atualizarCliente(cliente, endereco);
+       }
+
         Conexao conexao = new Conexao();
         DefaultTableModel tabCliente = (DefaultTableModel) jTableClientes.getModel();
 
         Cliente cliente = new Cliente();
-    Endereco endereco = new Endereco();
+        Endereco endereco = new Endereco();
 
-    // Preencher dados do cliente
-    cliente.setCod_Cliente(Integer.parseInt(txtCodCliente.getText()));
-    cliente.setNome_Cliente(txtNomeCliente.getText());
-    cliente.setApelido_Cliente(txtApelido.getText());
-    cliente.setCelular(txtCelular.getText());
-    cliente.setCelular_Whatsapp(txtCelular_Whatsapp.getText());
-    cliente.setData_Nasc(txtDataNasc.getText());
-    cliente.setEstado_Civil(jComboBoxEstadoCivil.getSelectedItem().toString());
-    cliente.setNome_Mae(txtNomeMae.getText());
-    cliente.setNome_Pai(txtNomePai.getText());
-    cliente.setCpf_Cliente(txtCPF.getText());
-    cliente.setRG_Cliente(txtRG.getText());
-    cliente.setCartao_Sus(txtCartaoSus.getText());
-    cliente.setTitulo_Eleitoral(txtTituloEleitoral.getText());
-    cliente.setSecao_Eleitoral(txtSecaoEleitoral.getText());
-    cliente.setZona_Eleitoral(txtZonaEleitoral.getText());
-    cliente.setObservacao(jTextAreaOBS.getText());
+        // Preencher dados do cliente
+        cliente.setCod_Cliente(Integer.parseInt(txtCodCliente.getText()));
+        cliente.setNome_Cliente(txtNomeCliente.getText());
+        cliente.setApelido_Cliente(txtApelido.getText());
+        cliente.setCelular(txtCelular.getText());
+        cliente.setCelular_Whatsapp(txtCelular_Whatsapp.getText());
+        cliente.setData_Nasc(txtDataNasc.getText());
+        cliente.setEstado_Civil(jComboBoxEstadoCivil.getSelectedItem().toString());
+        cliente.setNome_Mae(txtNomeMae.getText());
+        cliente.setNome_Pai(txtNomePai.getText());
+        cliente.setCpf_Cliente(txtCPF.getText());
+        cliente.setRG_Cliente(txtRG.getText());
+        cliente.setCartao_Sus(txtCartaoSus.getText());
+        cliente.setTitulo_Eleitoral(txtTituloEleitoral.getText());
+        cliente.setSecao_Eleitoral(txtSecaoEleitoral.getText());
+        cliente.setZona_Eleitoral(txtZonaEleitoral.getText());
+        cliente.setObservacao(jTextAreaOBS.getText());
 
-    // Preencher dados do endereço
-    //endereco.setId_endereco(Integer.parseInt(txtIdEndereco.getText()));
-    endereco.setLogradouro(txtEndereco.getText());
-    endereco.setBairro(txtBairro.getText());
-    endereco.setComplemento(txtComplemento.getText());
-    endereco.setCidade(txtCidade.getText());
-    endereco.setCep(txtCEP.getText());
-    endereco.setUf(txtUF.getText());
+        // Preencher dados do endereço
+        //endereco.setId_endereco(Integer.parseInt(txtIdEndereco.getText()));
+        endereco.setLogradouro(txtEndereco.getText());
+        endereco.setBairro(txtBairro.getText());
+        endereco.setComplemento(txtComplemento.getText());
+        endereco.setCidade(txtCidade.getText());
+        endereco.setCep(txtCEP.getText());
+        endereco.setUf(txtUF.getText());
 
-    ClienteDAO clienteDAO = new ClienteDAO();
-    if (clienteDAO.atualizarCliente(cliente, endereco)) {
-        JOptionPane.showMessageDialog(this, "Cliente e Endereço atualizados com sucesso!");
-    } else {
-        JOptionPane.showMessageDialog(this, "Erro ao atualizar Cliente e Endereço.");
-    }
+        if (clienteDAO.adicionarCliente(cliente, endereco)) {
+            JOptionPane.showMessageDialog(this, "Cliente e Endereço Salvos com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar Cliente e Endereço.");
+        }
 
     }//GEN-LAST:event_btnSalvarCadastroActionPerformed
 
@@ -1412,217 +1431,217 @@ codigo anterior antes do acima
 
     private void txtCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCelularActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txtCelularActionPerformed
 
     private void jTextAreaOBSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextAreaOBSMouseClicked
         // TODO add your handling code here:
-      
+
     }//GEN-LAST:event_jTextAreaOBSMouseClicked
 
     private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
         // TODO add your handling code here:
         btnImprimir.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int opcao = JOptionPane.showOptionDialog(null, 
-                "Você deseja imprimir a tabela inteira ou apenas a linha selecionada?", 
-                "Escolha uma opção", 
-                JOptionPane.YES_NO_CANCEL_OPTION, 
-                JOptionPane.QUESTION_MESSAGE, 
-                null, 
-                new String[]{"Imprimir Tabela Inteira", "Imprimir Linha Selecionada", "Cancelar"}, 
-                "Imprimir Tabela Inteira");
-            
-            if (opcao == 0) {
-                // Imprimir a tabela inteira
-                try {
-                    boolean complete = jTableClientes.print();
-                    if (complete) {
-                        JOptionPane.showMessageDialog(null, "Impressão da tabela concluída com sucesso!", "Imprimir", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Impressão cancelada!", "Imprimir", JOptionPane.WARNING_MESSAGE);
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            } else if (opcao == 1) {
-                // Imprimir a linha selecionada
-                int selectedRow = jTableClientes.getSelectedRow();
-                if (selectedRow != -1) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int opcao = JOptionPane.showOptionDialog(null,
+                        "Você deseja imprimir a tabela inteira ou apenas a linha selecionada?",
+                        "Escolha uma opção",
+                        JOptionPane.YES_NO_CANCEL_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        new String[]{"Imprimir Tabela Inteira", "Imprimir Linha Selecionada", "Cancelar"},
+                        "Imprimir Tabela Inteira");
+
+                if (opcao == 0) {
+                    // Imprimir a tabela inteira
                     try {
-                        // Capturar dados da linha selecionada
-                        StringBuilder linhaDados = new StringBuilder();
-                        for (int i = 0; i < jTableClientes.getColumnCount(); i++) {
-                            String columnName = jTableClientes.getColumnName(i);
-                            String cellData = jTableClientes.getValueAt(selectedRow, i).toString();
-                            linhaDados.append(columnName).append(": ").append(cellData).append("\n");
-                        }
-                        
-                        // Mostrar os dados da linha antes de imprimir (opcional)
-                        JOptionPane.showMessageDialog(null, linhaDados.toString(), "Dados da Linha Selecionada", JOptionPane.INFORMATION_MESSAGE);
-                        
-                        // Agora, imprimir esses dados
                         boolean complete = jTableClientes.print();
                         if (complete) {
-                            JOptionPane.showMessageDialog(null, "Impressão da linha selecionada concluída com sucesso!", "Imprimir", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Impressão da tabela concluída com sucesso!", "Imprimir", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "Impressão cancelada!", "Imprimir", JOptionPane.WARNING_MESSAGE);
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Nenhuma linha selecionada!", "Erro", JOptionPane.ERROR_MESSAGE);
+                } else if (opcao == 1) {
+                    // Imprimir a linha selecionada
+                    int selectedRow = jTableClientes.getSelectedRow();
+                    if (selectedRow != -1) {
+                        try {
+                            // Capturar dados da linha selecionada
+                            StringBuilder linhaDados = new StringBuilder();
+                            for (int i = 0; i < jTableClientes.getColumnCount(); i++) {
+                                String columnName = jTableClientes.getColumnName(i);
+                                String cellData = jTableClientes.getValueAt(selectedRow, i).toString();
+                                linhaDados.append(columnName).append(": ").append(cellData).append("\n");
+                            }
+
+                            // Mostrar os dados da linha antes de imprimir (opcional)
+                            JOptionPane.showMessageDialog(null, linhaDados.toString(), "Dados da Linha Selecionada", JOptionPane.INFORMATION_MESSAGE);
+
+                            // Agora, imprimir esses dados
+                            boolean complete = jTableClientes.print();
+                            if (complete) {
+                                JOptionPane.showMessageDialog(null, "Impressão da linha selecionada concluída com sucesso!", "Imprimir", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Impressão cancelada!", "Imprimir", JOptionPane.WARNING_MESSAGE);
+                            }
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Nenhuma linha selecionada!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
-        }
-    });
+        });
     }//GEN-LAST:event_btnImprimirActionPerformed
 
     private void txtNomeClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeClienteKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtApelido.requestFocus();
         }
     }//GEN-LAST:event_txtNomeClienteKeyPressed
 
     private void txtApelidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApelidoKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtCelular.requestFocus();
         }
     }//GEN-LAST:event_txtApelidoKeyPressed
 
     private void txtCelularKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtCelular_Whatsapp.requestFocus();
         }
     }//GEN-LAST:event_txtCelularKeyPressed
 
     private void txtCelular_WhatsappKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelular_WhatsappKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtDataNasc.requestFocus();
         }
     }//GEN-LAST:event_txtCelular_WhatsappKeyPressed
 
     private void txtDataNascKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataNascKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             jComboBoxEstadoCivil.requestFocus();
         }
     }//GEN-LAST:event_txtDataNascKeyPressed
 
     private void jComboBoxEstadoCivilKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBoxEstadoCivilKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtCPF.requestFocus();
         }
     }//GEN-LAST:event_jComboBoxEstadoCivilKeyPressed
 
     private void txtCPFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtRG.requestFocus();
         }
     }//GEN-LAST:event_txtCPFKeyPressed
 
     private void txtRGKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRGKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtNomeMae.requestFocus();
         }
     }//GEN-LAST:event_txtRGKeyPressed
 
     private void txtNomeMaeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeMaeKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtNomePai.requestFocus();
         }
     }//GEN-LAST:event_txtNomeMaeKeyPressed
 
     private void txtNomePaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomePaiKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtCartaoSus.requestFocus();
         }
     }//GEN-LAST:event_txtNomePaiKeyPressed
 
     private void txtCartaoSusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCartaoSusKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtTituloEleitoral.requestFocus();
         }
     }//GEN-LAST:event_txtCartaoSusKeyPressed
 
     private void txtTituloEleitoralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTituloEleitoralKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtZonaEleitoral.requestFocus();
         }
     }//GEN-LAST:event_txtTituloEleitoralKeyPressed
 
     private void txtZonaEleitoralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtZonaEleitoralKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtSecaoEleitoral.requestFocus();
         }
     }//GEN-LAST:event_txtZonaEleitoralKeyPressed
 
     private void txtSecaoEleitoralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSecaoEleitoralKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtDataCadastro.requestFocus();
         }
     }//GEN-LAST:event_txtSecaoEleitoralKeyPressed
 
     private void txtDataCadastroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataCadastroKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             jTextAreaOBS.requestFocus();
         }
     }//GEN-LAST:event_txtDataCadastroKeyPressed
 
     private void jTextAreaOBSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaOBSKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtEndereco.requestFocus();
         }
     }//GEN-LAST:event_jTextAreaOBSKeyPressed
 
     private void txtEnderecoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnderecoKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtBairro.requestFocus();
         }
     }//GEN-LAST:event_txtEnderecoKeyPressed
 
     private void txtBairroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBairroKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtComplemento.requestFocus();
         }
     }//GEN-LAST:event_txtBairroKeyPressed
 
     private void txtComplementoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComplementoKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtCidade.requestFocus();
         }
     }//GEN-LAST:event_txtComplementoKeyPressed
 
     private void txtCidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidadeKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtCEP.requestFocus();
         }
     }//GEN-LAST:event_txtCidadeKeyPressed
 
     private void txtCEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCEPKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             txtUF.requestFocus();
         }
     }//GEN-LAST:event_txtCEPKeyPressed
@@ -1944,4 +1963,21 @@ codigo anterior antes do acima
         //limparCampos();
     }
 
+    public String capitalizarCliente(String cliente) {
+        // Divide o texto em palavras usando espaço como delimitador
+        String[] palavras = cliente.split(" ");
+        StringBuilder clienteFormatado = new StringBuilder();
+
+        // Converte a primeira letra de cada palavra para maiúscula
+        for (String palavra : palavras) {
+            if (palavra.length() > 0) {
+                clienteFormatado.append(palavra.substring(0, 1).toUpperCase())
+                        .append(palavra.substring(1).toLowerCase())
+                        .append(" ");
+            }
+        }
+
+        // Remove o espaço extra no final e retorna o resultado
+        return clienteFormatado.toString().trim();
+    }
 }

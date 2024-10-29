@@ -15,8 +15,7 @@ import models.Endereco;
  *
  * @author AQUI TEM
  */
-
-    public class ClienteDAO {
+public class ClienteDAO {
 
     private Connection conn;
 
@@ -29,100 +28,131 @@ import models.Endereco;
             JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco de dados");
         }
     }
-/*
+
     // Método para converter a primeira letra de cada palavra em maiúscula
-    public String capitalizarCliente(String cliente) {
+    public String capitalizarCliente(String nome) {
         // Divide o texto em palavras usando espaço como delimitador
-        String[] palavras = cliente.split(" ");
-        StringBuilder clienteFormatado = new StringBuilder();
+        String[] palavras = nome.split("\\s+ ");
+        StringBuilder nomeFormatado = new StringBuilder();
 
         // Converte a primeira letra de cada palavra para maiúscula
         for (String palavra : palavras) {
             if (palavra.length() > 0) {
-                clienteFormatado.append(palavra.substring(0, 1).toUpperCase())
+                nomeFormatado.append(palavra.substring(0, 1).toUpperCase())
                         .append(palavra.substring(1).toLowerCase())
                         .append(" ");
             }
         }
 
         // Remove o espaço extra no final e retorna o resultado
-        return clienteFormatado.toString().trim();
-    }*/
-    
-   public boolean atualizarCliente(Cliente cliente, Endereco endereco) {
-    String sqlCliente = "UPDATE cliente SET cod_cliente = ?, status_cliente = ?, nome_cliente = ?, apelido_cliente = ?, celular = ?, celular_whatsapp = ?, data_nasc = ?, estado_civil = ?, nome_mae = ?, nome_pai = ?, cpf_cliente = ?, rg_cliente = ?, cartao_sus = ?, titulo_eleitoral = ?, secao_eleitoral = ?, zona_eleitoral = ?, data_cadastro = ?, observacao = ? WHERE id_cliente = ?";
-    
-    String sqlEndereco = "UPDATE endereco SET logradouro = ?, bairro = ?, complemento = ?, cidade = ?, cep = ?, uf = ? WHERE id_endereco = ?";
+        return nomeFormatado.toString().trim();
+    }
 
-    try {
-        // Iniciando a transação
-        conn.setAutoCommit(false);
+    public boolean atualizarCliente(Cliente cliente, Endereco endereco) {
+        Conexao conexao = new Conexao();
+        Connection connection = null;
+        PreparedStatement stmt = null;
 
-        // Atualizando dados do cliente
-        try (PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente)) {
-            stmtCliente.setInt(1, cliente.getCod_Cliente());
-            stmtCliente.setString(2, cliente.getStatus_Cliente());
-            stmtCliente.setString(3, cliente.getNome_Cliente());
-            stmtCliente.setString(4, cliente.getApelido_Cliente());
-            stmtCliente.setString(5, cliente.getCelular());
-            stmtCliente.setString(6, cliente.getCelular_Whatsapp());
-            stmtCliente.setString(7, cliente.getData_Nasc());
-            stmtCliente.setString(8, cliente.getEstado_Civil());
-            stmtCliente.setString(9, cliente.getNome_Mae());
-            stmtCliente.setString(10, cliente.getNome_Pai());
-            stmtCliente.setString(11, cliente.getCpf_Cliente());
-            stmtCliente.setString(12, cliente.getRG_Cliente());
-            stmtCliente.setString(13, cliente.getCartao_Sus());
-            stmtCliente.setString(14, cliente.getTitulo_Eleitoral());
-            stmtCliente.setString(15, cliente.getSecao_Eleitoral());
-            stmtCliente.setString(16, cliente.getZona_Eleitoral());
-            stmtCliente.setString(17, cliente.getData_Cadastro());
-            stmtCliente.setString(18, cliente.getObservacao());
-            stmtCliente.setInt(19, cliente.getId_cliente());
-
-            int rowsUpdatedCliente = stmtCliente.executeUpdate(); // Executa a atualização do cliente
-        }
-
-        // Atualizando dados do endereço
-        try (PreparedStatement stmtEndereco = conn.prepareStatement(sqlEndereco)) {
-            stmtEndereco.setString(1, endereco.getLogradouro());
-            stmtEndereco.setString(2, endereco.getBairro());
-            stmtEndereco.setString(3, endereco.getComplemento());
-            stmtEndereco.setString(4, endereco.getCidade());
-            stmtEndereco.setString(5, endereco.getCep());
-            stmtEndereco.setString(6, endereco.getUf());
-            stmtEndereco.setInt(7, endereco.getId_endereco());
-
-            int rowsUpdatedEndereco = stmtEndereco.executeUpdate(); // Executa a atualização do endereço
-        }
-
-        // Se ambas as atualizações foram bem-sucedidas, confirma a transação
-        conn.commit();
-        return true;
-    } catch (SQLException e) {
         try {
-            conn.rollback(); // Reverte a transação em caso de erro
-        } catch (SQLException rollbackEx) {
-            JOptionPane.showMessageDialog(null, "Erro ao reverter a transação: " + rollbackEx.getMessage());
-        }
-        JOptionPane.showMessageDialog(null, "Erro ao atualizar cliente e endereço: " + e.getMessage());
-        return false;
-    } finally {
-        try {
-            conn.setAutoCommit(true); // Garante que o auto-commit seja ativado novamente
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao reativar auto-commit: " + ex.getMessage());
+
+            if (conexao.conectar()) {
+                connection = conexao.getConnection();
+            }
+            String sqlCliente = "UPDATE cliente SET cod_cliente = ?, status_cliente = ?, nome_cliente = ?, apelido_cliente = ?, celular = ?, celular_whatsapp = ?, data_nasc = ?, estado_civil = ?, nome_mae = ?, nome_pai = ?, cpf_cliente = ?, rg_cliente = ?, cartao_sus = ?, titulo_eleitoral = ?, secao_eleitoral = ?, zona_eleitoral = ?, data_cadastro = ?, observacao = ? WHERE id_cliente = ?";
+
+            String sqlEndereco = "UPDATE endereco SET logradouro = ?, bairro = ?, complemento = ?, cidade = ?, cep = ?, uf = ? WHERE id_endereco = ?";
+
+            // Iniciando a transação
+            conn.setAutoCommit(false);
+
+            // Atualizando dados do cliente
+            try (PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente)) {
+                stmtCliente.setInt(1, cliente.getCod_Cliente());
+                stmtCliente.setString(2, cliente.getStatus_Cliente());
+                stmtCliente.setString(3, cliente.getNome_Cliente());
+                stmtCliente.setString(4, cliente.getApelido_Cliente());
+                stmtCliente.setString(5, cliente.getCelular());
+                stmtCliente.setString(6, cliente.getCelular_Whatsapp());
+                stmtCliente.setString(7, cliente.getData_Nasc());
+                stmtCliente.setString(8, cliente.getEstado_Civil());
+                stmtCliente.setString(9, cliente.getNome_Mae());
+                stmtCliente.setString(10, cliente.getNome_Pai());
+                stmtCliente.setString(11, cliente.getCpf_Cliente());
+                stmtCliente.setString(12, cliente.getRG_Cliente());
+                stmtCliente.setString(13, cliente.getCartao_Sus());
+                stmtCliente.setString(14, cliente.getTitulo_Eleitoral());
+                stmtCliente.setString(15, cliente.getSecao_Eleitoral());
+                stmtCliente.setString(16, cliente.getZona_Eleitoral());
+                stmtCliente.setString(17, cliente.getData_Cadastro());
+                stmtCliente.setString(18, cliente.getObservacao());
+                stmtCliente.setInt(19, cliente.getId_cliente());
+
+                int rowsUpdatedCliente = stmtCliente.executeUpdate(); // Executa a atualização do cliente
+            }
+
+            // Atualizando dados do endereço
+            try (PreparedStatement stmtEndereco = conn.prepareStatement(sqlEndereco)) {
+                stmtEndereco.setString(1, endereco.getLogradouro());
+                stmtEndereco.setString(2, endereco.getBairro());
+                stmtEndereco.setString(3, endereco.getComplemento());
+                stmtEndereco.setString(4, endereco.getCidade());
+                stmtEndereco.setString(5, endereco.getCep());
+                stmtEndereco.setString(6, endereco.getUf());
+                stmtEndereco.setInt(7, endereco.getId_endereco());
+
+                int rowsUpdatedEndereco = stmtEndereco.executeUpdate(); // Executa a atualização do endereço
+            }
+
+            // Se ambas as atualizações foram bem-sucedidas, confirma a transação
+            conn.commit();
+            return true;
+        } catch (SQLException e) {
+            try {
+                conn.rollback(); // Reverte a transação em caso de erro
+            } catch (SQLException rollbackEx) {
+                JOptionPane.showMessageDialog(null, "Erro ao reverter a transação: " + rollbackEx.getMessage());
+            }
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar cliente e endereço: " + e.getMessage());
+            return false;
+        } finally {
+            try {
+                conn.setAutoCommit(true); // Garante que o auto-commit seja ativado novamente
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + ex.getMessage());
+            } finally {
+                desconectar();
+            }
         }
     }
-}
 
+    public boolean atualizarEndereco(Endereco endereco, int idEndereco) {
+        String sql = "UPDATE endereco SET logradouro = ?, complemento = ?, bairro = ?, cidade = ?, cep = ?, uf = ? WHERE id_endereco = ?";
 
-    
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, endereco.getLogradouro());
+            stmt.setString(2, endereco.getComplemento());
+            stmt.setString(3, endereco.getBairro());
+            stmt.setString(4, endereco.getCidade());
+            stmt.setString(5, endereco.getCep());
+            stmt.setString(6, endereco.getUf());
+            stmt.setInt(7, idEndereco);
+
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0; // Retorna true se a atualização foi bem-sucedida
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar o endereço: " + e.getMessage());
+        }
+        /*finally{
+            desconectar();
+        }*/
+        return false;
+    }
+
     public Cliente getClientePorId(int idCliente) {
-        
+
         String sql = "SELECT c.*, e.* FROM cliente c INNER JOIN endereco e ON c.id_endereco = e.id_endereco WHERE c.id_cliente = ?";
         Cliente cliente = null;
-        
+
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idCliente);
             ResultSet rs = stmt.executeQuery();
@@ -157,8 +187,7 @@ import models.Endereco;
                 endereco.setLogradouro(rs.getString("Cidade"));
                 endereco.setLogradouro(rs.getString("CEP"));
                 endereco.setLogradouro(rs.getString("UF"));
-                
-               
+
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar cliente: " + e.getMessage());
@@ -173,11 +202,12 @@ import models.Endereco;
                 conn.close();
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao fechar a conexão: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + ex.getMessage());
+        } finally {
+            desconectar();
         }
     }
 
-    
     public static void main(String[] args) {
         Conexao conexao = new Conexao();
 
@@ -192,7 +222,7 @@ import models.Endereco;
 
                 // Exiba os resultados
                 while (rs.next()) {
-                    System.out.println("ID: " + rs.getInt("id_cliente") + ", Cod_cliente: " + rs.getInt("Cod_cliente") 
+                    System.out.println("ID: " + rs.getInt("id_cliente") + ", Cod_cliente: " + rs.getInt("Cod_cliente")
                             + ", Status_Cliente: " + rs.getString("Status_Cliente") + ", Nome: " + rs.getString("nome_cliente")
                             + ", Apelido_Cliente: " + rs.getString("Apelido_Cliente") + ", Celular: " + rs.getString("Celular")
                             + ",Celular_Whatsapp : " + rs.getString("Celular_Whatsapp") + ",Data_Nasc : " + rs.getString("Data_Nasc")
@@ -225,38 +255,109 @@ import models.Endereco;
         }
     }
 
-    public boolean adicionarCliente(Cliente cliente) {
-            String sql = "INSERT INTO cliente (Cod_Cliente, Status_Cliente, Nome_Cliente, Apelido_Cliente, Celular, Celular_Whatsapp, "
-                    + "Data_Nasc, Estado_Civil, Nome_Mae, Nome_Pai, CPF_Cliente, RG_Cliente, Cartao_Sus, Titulo_Eleitoral, Secao_Eleitoral, "
-                    + "Zona_Eleitoral, Data_Cadastro, Observacao,id_endereco)"
-                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setInt(1, cliente.getCod_Cliente());
-                stmt.setString(2, cliente.getStatus_Cliente());
-                stmt.setString(3, cliente.getNome_Cliente());
-                stmt.setString(4, cliente.getApelido_Cliente());
-                stmt.setString(5, cliente.getCelular());
-                stmt.setString(6, cliente.getCelular_Whatsapp());
-                stmt.setString(7, cliente.getData_Nasc());
-                stmt.setString(8, cliente.getEstado_Civil());
-                stmt.setString(9, cliente.getNome_Mae());
-                stmt.setString(10, cliente.getNome_Pai());
-                stmt.setString(11, cliente.getCpf_Cliente());
-                stmt.setString(12, cliente.getRG_Cliente());
-                stmt.setString(13, cliente.getCartao_Sus());
-                stmt.setString(14, cliente.getTitulo_Eleitoral());
-                stmt.setString(15, cliente.getSecao_Eleitoral());
-                stmt.setString(16, cliente.getZona_Eleitoral());
-                stmt.setString(17, cliente.getData_Cadastro());
-                stmt.setString(18, cliente.getObservacao());
-                stmt.setInt(19, cliente.getId_endereco());
+    public boolean adicionarCliente(Cliente cliente, Endereco endereco) {
+        String sqlCliente = "INSERT INTO cliente (Cod_Cliente, Status_Cliente, Nome_Cliente, Apelido_Cliente, Celular, Celular_Whatsapp, "
+                + "Data_Nasc, Estado_Civil, Nome_Mae, Nome_Pai, CPF_Cliente, RG_Cliente, Cartao_Sus, Titulo_Eleitoral, Secao_Eleitoral, "
+                + "Zona_Eleitoral, Data_Cadastro, Observacao) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-                return true;
+        String sqlEndereco = "INSERT INTO endereco (logradouro, complemento, bairro, cidade, uf, cep, id_cliente) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            // Desabilitar o autocommit para tratar as transações
+            conn.setAutoCommit(false);
+
+            // Inserindo o cliente
+            try (PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente, Statement.RETURN_GENERATED_KEYS)) {
+                //stmtCliente.setInt(1, cliente.getCod_Cliente());
+                stmtCliente.setString(1, cliente.getStatus_Cliente());
+                stmtCliente.setString(2, cliente.getNome_Cliente());
+                stmtCliente.setString(3, cliente.getApelido_Cliente());
+                stmtCliente.setString(4, cliente.getCelular());
+                stmtCliente.setString(5, cliente.getCelular_Whatsapp());
+                stmtCliente.setString(6, cliente.getData_Nasc());
+                stmtCliente.setString(7, cliente.getEstado_Civil());
+                stmtCliente.setString(8, cliente.getNome_Mae());
+                stmtCliente.setString(9, cliente.getNome_Pai());
+                stmtCliente.setString(10, cliente.getCpf_Cliente());
+                stmtCliente.setString(11, cliente.getRG_Cliente());
+                stmtCliente.setString(12, cliente.getCartao_Sus());
+                stmtCliente.setString(13, cliente.getTitulo_Eleitoral());
+                stmtCliente.setString(14, cliente.getSecao_Eleitoral());
+                stmtCliente.setString(15, cliente.getZona_Eleitoral());
+                stmtCliente.setString(16, cliente.getData_Cadastro());
+                stmtCliente.setString(17, cliente.getObservacao());
+                stmtCliente.executeUpdate();
+
+                // Recupera o ID do cliente gerado automaticamente
+                ResultSet rs = stmtCliente.getGeneratedKeys();
+                if (rs.next()) {
+                    int idClienteGerado = rs.getInt(1);
+                    // Inserindo o endereço associado ao id_cliente
+                    try (PreparedStatement stmtEndereco = conn.prepareStatement(sqlEndereco)) {
+                        stmtEndereco.setString(1, endereco.getLogradouro());
+                        stmtEndereco.setString(2, endereco.getComplemento());
+                        stmtEndereco.setString(3, endereco.getBairro());
+                        stmtEndereco.setString(4, endereco.getCidade());
+                        stmtEndereco.setString(5, endereco.getUf());
+                        stmtEndereco.setString(6, endereco.getCep());
+                        stmtEndereco.setInt(7, idClienteGerado);  // Associação com o id_cliente
+
+                        stmtEndereco.executeUpdate();
+                    }
+
+                    // Confirma a transação
+                    conn.commit();
+                    return true;
+                }
             } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
+                conn.rollback();  // Reverte a transação em caso de falha
+                JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente e endereço: " + e.getMessage());
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro de conexão: " + e.getMessage());
+        } finally {
+            try {
+                conn.setAutoCommit(true);  // Certifica-se que o auto-commit seja restaurado
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao restaurar auto-commit: " + e.getMessage());
             }
         }
+        return false;
+    }
+
+    public boolean clienteExistente(String cpf, String nome) {
+        Conexao conexao = new Conexao();
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try{
+        if (conexao.conectar()) {
+            connection = conexao.getConnection();
+            String sql = "SELECT COUNT(*) FROM cliente WHERE cliente = ?";
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, nome);
+            rs = stmt.executeQuery();
+        
+            if (rs.next()) {
+            return true;
+            }
+        }
+
+    }catch(SQLException e){
+        JOptionPane.showMessageDialog(null, "Erro ao verificar se o produto já existe: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao fechar conexão: " + e.getMessage());
+            }
+        }
+        return false; // Produto não existe
+    }
 
     public List<Cliente> listarClientes() {
         List<Cliente> listar = new ArrayList<>();
@@ -288,31 +389,13 @@ import models.Endereco;
                 listar.add(cliente);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + e.getMessage());
         }
+        /*finally{
+            desconectar();
+        }*/
         return listar;
     }
-
-    public boolean atualizarEndereco(Endereco endereco, int idEndereco) {
-    String sql = "UPDATE endereco SET logradouro = ?, complemento = ?, bairro = ?, cidade = ?, cep = ?, uf = ? WHERE id_endereco = ?";
-    
-    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-        stmt.setString(1, endereco.getLogradouro());
-        stmt.setString(2, endereco.getComplemento());
-        stmt.setString(3, endereco.getBairro());
-        stmt.setString(4, endereco.getCidade());
-        stmt.setString(5, endereco.getCep());
-        stmt.setString(6, endereco.getUf());
-        stmt.setInt(7, idEndereco);
-        
-        int rowsUpdated = stmt.executeUpdate();
-        return rowsUpdated > 0; // Retorna true se a atualização foi bem-sucedida
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Erro ao atualizar endereço: " + e.getMessage());
-        return false;
-    }
-}
-
 
     public boolean inativarCliente(int idCliente) {
         String sql = "UPDATE cliente SET status_Cliente = 'inativo' WHERE id_cliente = ?";
@@ -322,9 +405,12 @@ import models.Endereco;
 
             return rowsAffected > 0; // Retorna true se a atualização foi bem-sucedida
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            JOptionPane.showMessageDialog(null, "Erro ao inativar o cliente: " + e.getMessage());
         }
+        /*finally{
+            desconectar();
+        }*/
+        return false;
     }
 
     public List<Cliente> listarClientesAtivos() {
@@ -340,8 +426,11 @@ import models.Endereco;
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + e.getMessage());
         }
+        /*finally{
+            desconectar();
+        }*/
 
         return clientes;
     }
@@ -377,8 +466,11 @@ import models.Endereco;
                 cliente.setId_endereco(rs.getInt("id_endereco"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + e.getMessage());
         }
+        /*finally{
+            desconectar();
+        }*/
 
         return cliente;
     }
@@ -414,8 +506,11 @@ import models.Endereco;
                 cliente.setId_endereco(rs.getInt("id_endereco"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + e.getMessage());
         }
+        /*finally{
+            desconectar();
+        }*/
 
         return cliente;
     }
@@ -451,9 +546,69 @@ import models.Endereco;
                 cliente.setId_endereco(rs.getInt("id_endereco"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + e.getMessage());
         }
+        /*finally{
+            desconectar();
+        }*/
 
         return cliente;
     }
+
+    public Cliente verificarExistencia(String cpf, String nome) {
+        Conexao conexao = new Conexao();
+        Connection connection = null;
+
+        Cliente cliente = null;
+        String sql = "SELECT * FROM clientes WHERE cpf_Cliente = ? OR nome_Cliente = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, cpf);
+            stmt.setString(2, nome);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                cliente = new Cliente();
+                //cliente.setId_Cliente(rs.getInt("id_cliente"));
+                cliente.setCod_Cliente(rs.getInt("cod_cliente"));
+                cliente.setStatus_Cliente(rs.getString("Status_Cliente"));
+                cliente.setNome_Cliente(rs.getString("Nome_Cliente"));
+                cliente.setApelido_Cliente(rs.getString("Apelido_Cliente"));
+                cliente.setCelular(rs.getString("Celular"));
+                cliente.setCelular_Whatsapp(rs.getString("Celular_Whatsapp"));
+                cliente.setData_Nasc(rs.getString("Data_Nasc"));
+                cliente.setEstado_Civil(rs.getString("Estado_Civil"));
+                cliente.setNome_Mae(rs.getString("Nome_Mae"));
+                cliente.setNome_Pai(rs.getString("Nome_Pai"));
+                cliente.setCpf_Cliente(rs.getString("CPF_Cliente"));
+                cliente.setRG_Cliente(rs.getString("RG_Cliente"));
+                cliente.setCartao_Sus(rs.getString("Cartao_Sus"));
+                cliente.setTitulo_Eleitoral(rs.getString("Titulo_Eleitoral"));
+                cliente.setSecao_Eleitoral(rs.getString("Secao_Eleitoral"));
+                cliente.setZona_Eleitoral(rs.getString("Zona_Eleitoral"));
+                cliente.setData_Cadastro(rs.getString("Data_Cadastro"));
+                cliente.setId_endereco(rs.getInt("id_endereco"));
+
+                Endereco endereco = new Endereco();
+                endereco.setId_endereco(rs.getInt("id_endereco"));
+                endereco.setLogradouro(rs.getString("logradouro"));
+                endereco.setBairro(rs.getString("bairro"));
+                endereco.setComplemento(rs.getString("complemento"));
+                endereco.setCidade(rs.getString("cidade"));
+                endereco.setCep(rs.getString("cep"));
+                endereco.setUf(rs.getString("uf"));
+
+                // Defina outros campos conforme necessário
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + e.getMessage());
+        } finally {
+            desconectar();
+        }
+
+        return cliente; // Retorna o cliente encontrado ou null se não existir
+    }
+
 }

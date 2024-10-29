@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
-
+ 
 /**
  * Classe responsável pela Conexão com o Banco de Dados Vs1 - Ultima atualização
  * 13/09/24
