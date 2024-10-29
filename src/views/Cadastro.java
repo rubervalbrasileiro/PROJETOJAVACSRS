@@ -183,12 +183,14 @@ public class Cadastro extends javax.swing.JFrame {
         jComboBoxEstadoCivil = new javax.swing.JComboBox<>();
         btnImprimir = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableClientes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Cadastro");
+        setBackground(new java.awt.Color(0, 115, 190));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -299,7 +301,7 @@ public class Cadastro extends javax.swing.JFrame {
                     .addGroup(jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnSaude, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnFundoLayout.setVerticalGroup(
             jpnFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -636,7 +638,7 @@ public class Cadastro extends javax.swing.JFrame {
                 btnSalvarCadastroActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalvarCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 440, 60, 40));
+        jPanel1.add(btnSalvarCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 440, 60, 40));
 
         btnSaida1.setBackground(new java.awt.Color(0, 115, 190));
         btnSaida1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/saida.png"))); // NOI18N
@@ -647,7 +649,7 @@ public class Cadastro extends javax.swing.JFrame {
                 btnSaida1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSaida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 440, 50, 40));
+        jPanel1.add(btnSaida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 440, 50, 40));
 
         btnAtualizarCadastro.setBackground(new java.awt.Color(0, 115, 190));
         btnAtualizarCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/atulizar.png"))); // NOI18N
@@ -663,7 +665,7 @@ public class Cadastro extends javax.swing.JFrame {
                 btnAtualizarCadastroActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAtualizarCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 440, 50, 40));
+        jPanel1.add(btnAtualizarCadastro, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, 50, 40));
 
         btnProximo.setBackground(new java.awt.Color(0, 115, 190));
         btnProximo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/proximo.png"))); // NOI18N
@@ -674,7 +676,7 @@ public class Cadastro extends javax.swing.JFrame {
                 btnProximoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnProximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, 50, 40));
+        jPanel1.add(btnProximo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 440, 50, 40));
 
         try {
             txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-###.###-##")));
@@ -778,7 +780,7 @@ public class Cadastro extends javax.swing.JFrame {
                 btnAnterior1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAnterior1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 50, 40));
+        jPanel1.add(btnAnterior1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 440, 50, 40));
 
         try {
             txtCartaoSus.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-####-####-####")));
@@ -846,7 +848,7 @@ public class Cadastro extends javax.swing.JFrame {
                 btnImprimirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 440, 50, 40));
+        jPanel1.add(btnImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 440, 50, 40));
 
         btnLimpar.setBackground(new java.awt.Color(0, 115, 190));
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Limpar.png"))); // NOI18N
@@ -856,7 +858,18 @@ public class Cadastro extends javax.swing.JFrame {
                 btnLimparActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 440, 60, 40));
+        jPanel1.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 440, 60, 40));
+
+        btnDeletar.setBackground(new java.awt.Color(0, 115, 190));
+        btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/deletar_usuario.png"))); // NOI18N
+        btnDeletar.setToolTipText("Deletar Usuario");
+        btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDeletar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 440, 50, 40));
 
         jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -890,16 +903,17 @@ public class Cadastro extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1014, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(308, 308, 308))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -909,10 +923,10 @@ public class Cadastro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1652,6 +1666,10 @@ codigo anterior antes do acima
         txtNomeCliente.requestFocus();
     }//GEN-LAST:event_btnLimparActionPerformed
 
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeletarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1693,6 +1711,7 @@ codigo anterior antes do acima
     private javax.swing.JButton btnAnterior1;
     private javax.swing.JButton btnAtualizarCadastro;
     private javax.swing.JButton btnCadastro;
+    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnFiltro;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnImpressao;
