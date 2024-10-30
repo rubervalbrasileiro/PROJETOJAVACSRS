@@ -413,6 +413,19 @@ public class ClienteDAO {
         return false;
     }
 
+    public boolean ativarCliente(int idCliente){
+        String sql = "UPDATE cliente SET status_Cliente = 'ativo' WHERE id_cliente = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setInt(1, idCliente);
+            int rowsAffected = stmt.executeUpdate();
+            
+            return rowsAffected >= 0;
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Ativar o Cliente: "+ e.getMessage());
+        }
+        return false;
+    }
+    
     public List<Cliente> listarClientesAtivos() {
         List<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM cliente WHERE status_Cliente = 'inativo'";
