@@ -119,9 +119,7 @@ public class ClienteDAO {
                 conn.setAutoCommit(true); // Garante que o auto-commit seja ativado novamente
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + ex.getMessage());
-            } finally {
-                desconectar();
-            }
+            } 
         }
     }
 
@@ -203,9 +201,7 @@ public class ClienteDAO {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + ex.getMessage());
-        } finally {
-            desconectar();
-        }
+        } 
     }
 
     public static void main(String[] args) {
@@ -391,9 +387,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + e.getMessage());
         }
-        /*finally{
-            desconectar();
-        }*/
+        
         return listar;
     }
 
@@ -407,9 +401,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao inativar o cliente: " + e.getMessage());
         }
-        /*finally{
-            desconectar();
-        }*/
+        
         return false;
     }
 
@@ -441,10 +433,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + e.getMessage());
         }
-        /*finally{
-            desconectar();
-        }*/
-
+        
         return clientes;
     }
 
@@ -481,10 +470,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + e.getMessage());
         }
-        /*finally{
-            desconectar();
-        }*/
-
+        
         return cliente;
     }
 
@@ -521,10 +507,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + e.getMessage());
         }
-        /*finally{
-            desconectar();
-        }*/
-
+        
         return cliente;
     }
 
@@ -561,21 +544,21 @@ public class ClienteDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + e.getMessage());
         }
-        /*finally{
-            desconectar();
-        }*/
-
+        
         return cliente;
     }
 
     public Cliente verificarExistencia(String cpf, String nome) {
         Conexao conexao = new Conexao();
-        Connection connection = null;
+        if(!conexao.conectar()){
+            JOptionPane.showMessageDialog(null, "Não foi possivel estabelecer uma conexao com o banco.");
+            return null;
+        }
 
         Cliente cliente = null;
-        String sql = "SELECT * FROM clientes WHERE cpf_Cliente = ? OR nome_Cliente = ?";
+        String sql = "SELECT * FROM cliente WHERE cpf_Cliente = ? OR nome_Cliente = ?";
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = conexao.getConnection().prepareStatement(sql)) {
 
             stmt.setString(1, cpf);
             stmt.setString(2, nome);
@@ -584,7 +567,7 @@ public class ClienteDAO {
 
             if (rs.next()) {
                 cliente = new Cliente();
-                //cliente.setId_Cliente(rs.getInt("id_cliente"));
+                cliente.setId_cliente(rs.getInt("id_cliente"));
                 cliente.setCod_Cliente(rs.getInt("cod_cliente"));
                 cliente.setStatus_Cliente(rs.getString("Status_Cliente"));
                 cliente.setNome_Cliente(rs.getString("Nome_Cliente"));
@@ -618,8 +601,8 @@ public class ClienteDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + e.getMessage());
         } finally {
-            desconectar();
-        }
+        conexao.desconectar(); // Fecha a conexão após o uso
+    }
 
         return cliente; // Retorna o cliente encontrado ou null se não existir
     }

@@ -334,9 +334,9 @@ public class Cadastro extends javax.swing.JFrame {
         lblCodCliente.setText("Cod. Cliente:");
         jPanel1.add(lblCodCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
 
-        txtCodCliente.setEditable(false);
         txtCodCliente.setToolTipText("Código");
         txtCodCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtCodCliente.setRequestFocusEnabled(false);
         txtCodCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodClienteActionPerformed(evt);
@@ -876,11 +876,11 @@ public class Cadastro extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cod", "Status", "Nome", "Apelido", "Celular", "Celular_Whatssap", "Data_Nasc", "Estado_Civil", "Mae", "Pai", "CPF", "RG", "SUS", "Titulo_Eleitoral", "Secao_Eleitoral", "Zona_Eleitoral", "Data_Cadastro", "Observacao", "id_endereco", "Logradouro", "Complemento", "Bairro", "Cidade", "Cep", "UF"
+                "id", "Cod", "Status", "Nome", "Apelido", "Celular", "Celular_Whatssap", "Data_Nasc", "Estado_Civil", "Mae", "Pai", "CPF", "RG", "SUS", "Titulo_Eleitoral", "Secao_Eleitoral", "Zona_Eleitoral", "Data_Cadastro", "Observacao", "id_endereco", "Logradouro", "Complemento", "Bairro", "Cidade", "Cep", "UF"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true
+                true, false, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1260,20 +1260,21 @@ codigo anterior antes do acima
         }
 
         nome = capitalizarCliente(nome);
+        txtNomeCliente.setText(nome);
      
         ClienteDAO clienteDAO = new ClienteDAO();
        Cliente clienteExistente = clienteDAO.verificarExistencia(cpf, nome);
+       
        if(clienteExistente != null){
-        // ClienteDAO.atualizarCliente(cliente, endereco);
+        JOptionPane.showMessageDialog(this, "Cliente já estar cadastrado. ", "Cliente Existe", JOptionPane.INFORMATION_MESSAGE);
+        return;
        }
-
-        Conexao conexao = new Conexao();
-        DefaultTableModel tabCliente = (DefaultTableModel) jTableClientes.getModel();
 
         Cliente cliente = new Cliente();
         Endereco endereco = new Endereco();
-
-        // Preencher dados do cliente
+        
+                // Preencher dados do cliente
+        //cliente.setId_cliente(Integer.parseInt(jTableClientes));
         cliente.setCod_Cliente(Integer.parseInt(txtCodCliente.getText()));
         cliente.setNome_Cliente(txtNomeCliente.getText());
         cliente.setApelido_Cliente(txtApelido.getText());
@@ -1303,7 +1304,7 @@ codigo anterior antes do acima
         if (clienteDAO.adicionarCliente(cliente, endereco)) {
             JOptionPane.showMessageDialog(this, "Cliente e Endereço Salvos com sucesso!");
         } else {
-            JOptionPane.showMessageDialog(this, "Erro ao atualizar Cliente e Endereço.");
+            JOptionPane.showMessageDialog(this, "Erro ao salvar Cliente e Endereço.");
         }
 
     }//GEN-LAST:event_btnSalvarCadastroActionPerformed
@@ -1317,7 +1318,7 @@ codigo anterior antes do acima
 
     private void txtCodClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodClienteActionPerformed
         // TODO add your handling code here:
-        /*  Conexao conexao = new Conexao();
+         Conexao conexao = new Conexao();
         
         try {
     String sql = "INSERT INTO cliente (...) VALUES (...)";
@@ -1339,7 +1340,7 @@ codigo anterior antes do acima
     stmt.close();
 } catch (SQLException e) {
     e.printStackTrace();
-}*/
+}
     }//GEN-LAST:event_txtCodClienteActionPerformed
 
     private void txtUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUFActionPerformed
