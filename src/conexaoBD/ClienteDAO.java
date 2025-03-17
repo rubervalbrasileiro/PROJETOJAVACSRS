@@ -28,6 +28,9 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco de dados");
         }
     }
+    
+    //========================================================================================================================//
+
 
     // Método para converter a primeira letra de cada palavra em maiúscula
     public String capitalizarCliente(String nome) {
@@ -47,23 +50,26 @@ public class ClienteDAO {
         // Remove o espaço extra no final e retorna o resultado
         return nomeFormatado.toString().trim();
     }
+    
+    //========================================================================================================================//
 
     public boolean atualizarCliente(Cliente cliente, Endereco endereco) {
         Conexao conexao = new Conexao();
-        Connection connection = null;
+        Connection conn = null;
         PreparedStatement stmt = null;
 
         try {
 
             if (conexao.conectar()) {
-                connection = conexao.getConnection();
+                conn = conexao.getConnection();
             }
-            String sqlCliente = "UPDATE cliente SET cod_cliente = ?, status_cliente = ?, nome_cliente = ?, apelido_cliente = ?, celular = ?, celular_whatsapp = ?, data_nasc = ?, estado_civil = ?, nome_mae = ?, nome_pai = ?, cpf_cliente = ?, rg_cliente = ?, cartao_sus = ?, titulo_eleitoral = ?, secao_eleitoral = ?, zona_eleitoral = ?, data_cadastro = ?, observacao = ? WHERE id_cliente = ?";
+            String sqlCliente = "UPDATE cliente SET Cod_Cliente = ?, Status_Cliente = ?, Nome_Cliente = ?, Apelido_Cliente = ?, Celular = ?, Celular_Whatsapp = ?, Data_Nasc = ?, Estado_Civil = ?, Nome_Mae = ?, Nome_Pai = ?, CPF_Cliente = ?, RG_Cliente = ?, Cartao_Sus = ?, Titulo_Eleitoral = ?, Secao_Eleitoral = ?, Zona_Eleitoral = ?, Data_Cadastro = ?, Observacao = ? WHERE id_Cliente = ?";
 
-            String sqlEndereco = "UPDATE endereco SET logradouro = ?, bairro = ?, complemento = ?, cidade = ?, cep = ?, uf = ? WHERE id_endereco = ?";
+            String sqlEndereco = "UPDATE endereco SET Logradouro = ?, Bairro = ?, Complemento = ?, Cidade = ?, CEP = ?, UF = ? WHERE id_endereco = ?";
 
             // Iniciando a transação
             conn.setAutoCommit(false);
+            
 
             // Atualizando dados do cliente
             try (PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente)) {
@@ -122,9 +128,11 @@ public class ClienteDAO {
             } 
         }
     }
+    
+    //========================================================================================================================//
 
     public boolean atualizarEndereco(Endereco endereco, int idEndereco) {
-        String sql = "UPDATE endereco SET logradouro = ?, complemento = ?, bairro = ?, cidade = ?, cep = ?, uf = ? WHERE id_endereco = ?";
+        String sql = "UPDATE endereco SET Logradouro = ?, Complemento = ?, Bairro = ?, Cidade = ?, CEP = ?, UF = ? WHERE id_endereco = ?";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, endereco.getLogradouro());
@@ -145,6 +153,9 @@ public class ClienteDAO {
         }*/
         return false;
     }
+    
+    //========================================================================================================================//
+
 
     public Cliente getClientePorId(int idCliente) {
 
@@ -203,6 +214,8 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, "Erro ao buscar o cliente: " + ex.getMessage());
         } 
     }
+    
+    //========================================================================================================================//
 
     public static void main(String[] args) {
         Conexao conexao = new Conexao();
@@ -251,77 +264,95 @@ public class ClienteDAO {
         }
     }
 
+    
+    //========================================================================================================================//
+
     public boolean adicionarCliente(Cliente cliente, Endereco endereco) {
-        String sqlCliente = "INSERT INTO cliente (Cod_Cliente, Status_Cliente, Nome_Cliente, Apelido_Cliente, Celular, Celular_Whatsapp, "
-                + "Data_Nasc, Estado_Civil, Nome_Mae, Nome_Pai, CPF_Cliente, RG_Cliente, Cartao_Sus, Titulo_Eleitoral, Secao_Eleitoral, "
-                + "Zona_Eleitoral, Data_Cadastro, Observacao) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    String sqlCliente = "INSERT INTO cliente (Cod_Cliente, Status_Cliente, Nome_Cliente, Apelido_Cliente, Celular, Celular_Whatsapp, "
+            + "Data_Nasc, Estado_Civil, Nome_Mae, Nome_Pai, CPF_Cliente, RG_Cliente, Cartao_Sus, Titulo_Eleitoral, Secao_Eleitoral, "
+            + "Zona_Eleitoral, Data_Cadastro, Observacao) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    String sqlEndereco = "INSERT INTO endereco (Logradouro, complemento, bairro, cidade, uf, cep, id_cliente) "
+            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
+    Conexao conexao = new Conexao();
+    Connection connection = null;
+    PreparedStatement stmtCliente = null;
+    PreparedStatement stmtEndereco = null;
 
-        String sqlEndereco = "INSERT INTO endereco (logradouro, complemento, bairro, cidade, uf, cep, id_cliente) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+    try {
+        if (conexao.conectar()) {
+            connection = conexao.getConnection();
+            connection.setAutoCommit(false);  // Inicia a transação
 
-        try {
-            // Desabilitar o autocommit para tratar as transações
-            conn.setAutoCommit(false);
+            // Insere o cliente
+            stmtCliente = connection.prepareStatement(sqlCliente, Statement.RETURN_GENERATED_KEYS);
+            stmtCliente.setInt(1, cliente.getCod_Cliente());
+            stmtCliente.setString(2, cliente.getStatus_Cliente());
+            stmtCliente.setString(3, cliente.getNome_Cliente());
+            stmtCliente.setString(4, cliente.getApelido_Cliente());
+            stmtCliente.setString(5, cliente.getCelular());
+            stmtCliente.setString(6, cliente.getCelular_Whatsapp());
+            stmtCliente.setString(7, cliente.getData_Nasc());
+            stmtCliente.setString(8, cliente.getEstado_Civil());
+            stmtCliente.setString(9, cliente.getNome_Mae());
+            stmtCliente.setString(10, cliente.getNome_Pai());
+            stmtCliente.setString(11, cliente.getCpf_Cliente());
+            stmtCliente.setString(12, cliente.getRG_Cliente());
+            stmtCliente.setString(13, cliente.getCartao_Sus());
+            stmtCliente.setString(14, cliente.getTitulo_Eleitoral());
+            stmtCliente.setString(15, cliente.getSecao_Eleitoral());
+            stmtCliente.setString(16, cliente.getZona_Eleitoral());
+            stmtCliente.setString(17, cliente.getData_Cadastro());
+            stmtCliente.setString(18, cliente.getObservacao());
 
-            // Inserindo o cliente
-            try (PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente, Statement.RETURN_GENERATED_KEYS)) {
-                //stmtCliente.setInt(1, cliente.getCod_Cliente());
-                stmtCliente.setString(1, cliente.getStatus_Cliente());
-                stmtCliente.setString(2, cliente.getNome_Cliente());
-                stmtCliente.setString(3, cliente.getApelido_Cliente());
-                stmtCliente.setString(4, cliente.getCelular());
-                stmtCliente.setString(5, cliente.getCelular_Whatsapp());
-                stmtCliente.setString(6, cliente.getData_Nasc());
-                stmtCliente.setString(7, cliente.getEstado_Civil());
-                stmtCliente.setString(8, cliente.getNome_Mae());
-                stmtCliente.setString(9, cliente.getNome_Pai());
-                stmtCliente.setString(10, cliente.getCpf_Cliente());
-                stmtCliente.setString(11, cliente.getRG_Cliente());
-                stmtCliente.setString(12, cliente.getCartao_Sus());
-                stmtCliente.setString(13, cliente.getTitulo_Eleitoral());
-                stmtCliente.setString(14, cliente.getSecao_Eleitoral());
-                stmtCliente.setString(15, cliente.getZona_Eleitoral());
-                stmtCliente.setString(16, cliente.getData_Cadastro());
-                stmtCliente.setString(17, cliente.getObservacao());
-                stmtCliente.executeUpdate();
+            int rowsAffected = stmtCliente.executeUpdate();
+            if (rowsAffected > 0) {
+                ResultSet generatedKeys = stmtCliente.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    int idCliente = generatedKeys.getInt(1);
 
-                // Recupera o ID do cliente gerado automaticamente
-                ResultSet rs = stmtCliente.getGeneratedKeys();
-                if (rs.next()) {
-                    int idClienteGerado = rs.getInt(1);
-                    // Inserindo o endereço associado ao id_cliente
-                    try (PreparedStatement stmtEndereco = conn.prepareStatement(sqlEndereco)) {
-                        stmtEndereco.setString(1, endereco.getLogradouro());
-                        stmtEndereco.setString(2, endereco.getComplemento());
-                        stmtEndereco.setString(3, endereco.getBairro());
-                        stmtEndereco.setString(4, endereco.getCidade());
-                        stmtEndereco.setString(5, endereco.getUf());
-                        stmtEndereco.setString(6, endereco.getCep());
-                        stmtEndereco.setInt(7, idClienteGerado);  // Associação com o id_cliente
+                    // Insere o endereço, vinculando ao ID do cliente gerado
+                    stmtEndereco = connection.prepareStatement(sqlEndereco);
+                    stmtEndereco.setString(1, endereco.getLogradouro());
+                    stmtEndereco.setString(2, endereco.getComplemento());
+                    stmtEndereco.setString(3, endereco.getBairro());
+                    stmtEndereco.setString(4, endereco.getCidade());
+                    stmtEndereco.setString(5, endereco.getUf());
+                    stmtEndereco.setString(6, endereco.getCep());
+                    stmtEndereco.setInt(7, idCliente);
 
-                        stmtEndereco.executeUpdate();
-                    }
-
-                    // Confirma a transação
-                    conn.commit();
+                    stmtEndereco.executeUpdate();
+                    connection.commit();  // Confirma a transação
                     return true;
                 }
-            } catch (SQLException e) {
-                conn.rollback();  // Reverte a transação em caso de falha
-                JOptionPane.showMessageDialog(null, "Erro ao adicionar cliente e endereço: " + e.getMessage());
             }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro de conexão: " + e.getMessage());
-        } finally {
-            try {
-                conn.setAutoCommit(true);  // Certifica-se que o auto-commit seja restaurado
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Erro ao restaurar auto-commit: " + e.getMessage());
-            }
+            connection.rollback();  // Desfaz a transação em caso de falha
         }
-        return false;
+    } catch (SQLException e) {
+        try {
+            if (connection != null) {
+                connection.rollback();  // Desfaz a transação em caso de erro
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro ao desfazer transação: " + ex.getMessage());
+        }
+        System.out.println("Erro ao adicionar cliente: " + e.getMessage());
+    } finally {
+        try {
+            if (stmtCliente != null) stmtCliente.close();
+            if (stmtEndereco != null) stmtEndereco.close();
+            if (connection != null) conexao.desconectar();
+        } catch (SQLException e) {
+            System.out.println("Erro ao fechar recursos: " + e.getMessage());
+        }
     }
+    return false;
+}
+    
+    //========================================================================================================================//
+
 
     public boolean clienteExistente(String cpf, String nome) {
         Conexao conexao = new Conexao();
@@ -354,6 +385,9 @@ public class ClienteDAO {
         }
         return false; // Produto não existe
     }
+    
+    //========================================================================================================================//
+
 
     public List<Cliente> listarClientes() {
         List<Cliente> listar = new ArrayList<>();
@@ -390,6 +424,9 @@ public class ClienteDAO {
         
         return listar;
     }
+    
+    //========================================================================================================================//
+
 
     public boolean inativarCliente(int idCliente) {
         String sql = "UPDATE cliente SET status_Cliente = 'inativo' WHERE id_cliente = ?";
@@ -404,6 +441,9 @@ public class ClienteDAO {
         
         return false;
     }
+    
+    //========================================================================================================================//
+
 
     public boolean ativarCliente(int idCliente){
         String sql = "UPDATE cliente SET status_Cliente = 'ativo' WHERE id_cliente = ?";
@@ -417,6 +457,9 @@ public class ClienteDAO {
         }
         return false;
     }
+    
+    //========================================================================================================================//
+
     
     public List<Cliente> listarClientesAtivos() {
         List<Cliente> clientes = new ArrayList<>();
@@ -436,6 +479,9 @@ public class ClienteDAO {
         
         return clientes;
     }
+    
+    //========================================================================================================================//
+
 
     public Cliente obterClientePorId(int idCliente) {
         String sql = "SELECT * FROM cliente WHERE id_cliente = ?";
@@ -473,6 +519,9 @@ public class ClienteDAO {
         
         return cliente;
     }
+    
+    //========================================================================================================================//
+
 
     public Cliente obterClientePorNome(String nomeCliente) {
         String sql = "SELECT * FROM cliente WHERE nome_cliente = ?";
@@ -510,6 +559,9 @@ public class ClienteDAO {
         
         return cliente;
     }
+    
+    //========================================================================================================================//
+
 
     public Cliente obterClientePorCPF(String cpf) {
         String sql = "SELECT * FROM cliente WHERE cpf_cliente = ?";
@@ -547,7 +599,11 @@ public class ClienteDAO {
         
         return cliente;
     }
-
+    
+    
+//==============================================================================================================================//
+    
+    
     public Cliente verificarExistencia(String cpf, String nome) {
         Conexao conexao = new Conexao();
         if(!conexao.conectar()){
@@ -589,12 +645,12 @@ public class ClienteDAO {
 
                 Endereco endereco = new Endereco();
                 endereco.setId_endereco(rs.getInt("id_endereco"));
-                endereco.setLogradouro(rs.getString("logradouro"));
-                endereco.setBairro(rs.getString("bairro"));
-                endereco.setComplemento(rs.getString("complemento"));
-                endereco.setCidade(rs.getString("cidade"));
-                endereco.setCep(rs.getString("cep"));
-                endereco.setUf(rs.getString("uf"));
+                endereco.setLogradouro(rs.getString("Logradouro"));
+                endereco.setBairro(rs.getString("Bairro"));
+                endereco.setComplemento(rs.getString("Complemento"));
+                endereco.setCidade(rs.getString("Cidade"));
+                endereco.setCep(rs.getString("CEP"));
+                endereco.setUf(rs.getString("UF"));
 
                 // Defina outros campos conforme necessário
             }
@@ -606,5 +662,106 @@ public class ClienteDAO {
 
         return cliente; // Retorna o cliente encontrado ou null se não existir
     }
+    
+//===========================================================================================================================//
+    
+    public boolean adicionarOuAtualizarCliente(Cliente cliente, Endereco endereco) {
+    Conexao conexao = new Conexao();
+    Connection connection = null;
+    PreparedStatement stmt = null;
+    boolean sucesso = false;
 
+    try {
+        if (conexao.conectar()) {
+            connection = conexao.getConnection();
+
+            // Verifica se o cliente já existe pelo Cod_Cliente
+            String sqlVerificaCliente = "SELECT id_cliente FROM cliente WHERE Cod_Cliente = ?";
+            stmt = connection.prepareStatement(sqlVerificaCliente);
+            stmt.setInt(1, cliente.getCod_Cliente());
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                // Cliente já existe: faz uma atualização
+                String sqlUpdateCliente = "UPDATE cliente SET  Status_Cliente = ?, Nome_Cliente = ?, Apelido_Cliente = ?, Celular = ?,"
+                       + "Celular_Whatsapp = ?, Data_Nasc = ?, Estado_Civil = ?, Nome_Mae = ?, Nome_Pai = ?, CPF_Cliente = ?,"
+                       +"RG_Cliente = ?, Cartao_Sus = ?, Titulo_Eleitoral = ?, Secao_Eleitoral = ?, Zona_Eleitoral = ?,"
+                       +"Data_Cadastro = ?, Observacao = ? WHERE Cod_Cliente = ?";
+
+                
+                stmt = connection.prepareStatement(sqlUpdateCliente);
+                
+                // Defina os parâmetros do cliente no SQL de atualização
+                stmt.setString(1, cliente.getStatus_Cliente());
+                stmt.setString(2, cliente.getNome_Cliente());
+                stmt.setString(3, cliente.getApelido_Cliente());
+                stmt.setString(4, cliente.getCelular());
+                stmt.setString(5, cliente.getCelular_Whatsapp());
+                stmt.setString(6, cliente.getData_Nasc());
+                stmt.setString(7, cliente.getEstado_Civil());
+                stmt.setString(8, cliente.getNome_Mae());
+                stmt.setString(9, cliente.getNome_Pai());
+                stmt.setString(10, cliente.getCpf_Cliente());
+                stmt.setString(11, cliente.getRG_Cliente());
+                stmt.setString(12, cliente.getCartao_Sus());
+                stmt.setString(13, cliente.getTitulo_Eleitoral());
+                stmt.setString(14, cliente.getSecao_Eleitoral());
+                stmt.setString(15, cliente.getZona_Eleitoral());
+                stmt.setString(16, cliente.getData_Cadastro());
+                stmt.setString(17, cliente.getObservacao());
+                stmt.setInt(18, cliente.getCod_Cliente());
+                
+                int rowsAffected = stmt.executeUpdate();
+                sucesso = rowsAffected > 0;
+
+            } else {
+                // Cliente não existe: insere um novo registro
+                String sqlInsertCliente = "INSERT INTO cliente (Cod_Cliente, Status_Cliente, Nome_Cliente, Apelido_Cliente, Celular, "
+                        + "Celular_Whatsapp, Data_Nasc, Estado_Civil, Nome_Mae, Nome_Pai, CPF_Cliente, RG_Cliente, Cartao_Sus, "
+                        + "Titulo_Eleitoral, Secao_Eleitoral, Zona_Eleitoral, Data_Cadastro, Observacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                stmt = connection.prepareStatement(sqlInsertCliente);
+
+                // Define os parâmetros do cliente para inserção
+                stmt.setInt(1, cliente.getCod_Cliente());
+                stmt.setString(2, cliente.getStatus_Cliente());
+                stmt.setString(3, cliente.getNome_Cliente());
+                stmt.setString(4, cliente.getApelido_Cliente());
+                stmt.setString(5, cliente.getCelular());
+                stmt.setString(6, cliente.getCelular_Whatsapp());
+                stmt.setString(7, cliente.getData_Nasc());
+                stmt.setString(8, cliente.getEstado_Civil());
+                stmt.setString(9, cliente.getNome_Mae());
+                stmt.setString(10, cliente.getNome_Pai());
+                stmt.setString(11, cliente.getCpf_Cliente());
+                stmt.setString(12, cliente.getRG_Cliente());
+                stmt.setString(13, cliente.getCartao_Sus());
+                stmt.setString(14, cliente.getTitulo_Eleitoral());
+                stmt.setString(15, cliente.getSecao_Eleitoral());
+                stmt.setString(16, cliente.getZona_Eleitoral());
+                stmt.setString(17, cliente.getData_Cadastro());
+                stmt.setString(18, cliente.getObservacao());
+                
+                int rowsAffected = stmt.executeUpdate();
+                sucesso = rowsAffected > 0;
+            }
+            JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao conectar ao banco de dados.");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Erro ao adicionar/atualizar cliente: " + e.getMessage());
+    } finally {
+        try {
+            if (stmt != null) stmt.close();
+            if (connection != null) conexao.desconectar();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao fechar conexão: " + e.getMessage());
+        }
+    }
+
+    return sucesso;
+}
+
+    //====================================================================================================================//
+    
 }

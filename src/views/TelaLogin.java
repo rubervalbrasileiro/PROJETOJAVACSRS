@@ -434,7 +434,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         // TODO add your handling code here: Fechar a tela
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnAcessarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnAcessarKeyPressed

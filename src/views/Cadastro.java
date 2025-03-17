@@ -9,8 +9,7 @@ import conexaoBD.ClienteDAO;
 import conexaoBD.EnderecoDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
 import models.Cliente;
 import models.Endereco;
 import javax.swing.JOptionPane;
@@ -46,8 +45,8 @@ public class Cadastro extends javax.swing.JFrame {
         txtNomeCliente.requestFocus();
 
         //txtCodCliente.setText(txtCodCliente);
-        /*txtStatus.setText("Ativo");
-        txtCidade.setText("Olinda");
+        txtStatus.setText("Ativo");
+        /*txtCidade.setText("Olinda");
         txtUF.setText("PE");
          */
     }
@@ -336,7 +335,6 @@ public class Cadastro extends javax.swing.JFrame {
 
         txtCodCliente.setToolTipText("Código");
         txtCodCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        txtCodCliente.setRequestFocusEnabled(false);
         txtCodCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodClienteActionPerformed(evt);
@@ -417,13 +415,13 @@ public class Cadastro extends javax.swing.JFrame {
         lblDataNasc.setForeground(new java.awt.Color(255, 255, 255));
         lblDataNasc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblDataNasc.setText("Data Nascimento");
-        jPanel1.add(lblDataNasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, -1, -1));
+        jPanel1.add(lblDataNasc, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 80, 100, -1));
 
         lblEstadoCivil.setBackground(new java.awt.Color(255, 255, 255));
         lblEstadoCivil.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         lblEstadoCivil.setForeground(new java.awt.Color(255, 255, 255));
         lblEstadoCivil.setText("Estado Civil");
-        jPanel1.add(lblEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, -1, -1));
+        jPanel1.add(lblEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 80, 60, -1));
 
         lblCPF.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         lblCPF.setForeground(new java.awt.Color(255, 255, 255));
@@ -720,6 +718,9 @@ public class Cadastro extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCelularKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCelularKeyReleased(evt);
+            }
         });
         jPanel1.add(txtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 120, 30));
 
@@ -837,7 +838,7 @@ public class Cadastro extends javax.swing.JFrame {
                 jComboBoxEstadoCivilKeyPressed(evt);
             }
         });
-        jPanel1.add(jComboBoxEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, -1, -1));
+        jPanel1.add(jComboBoxEstadoCivil, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 100, 100, -1));
 
         btnImprimir.setBackground(new java.awt.Color(0, 115, 190));
         btnImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/imprimir.png"))); // NOI18N
@@ -984,7 +985,7 @@ public class Cadastro extends javax.swing.JFrame {
 
     private void txtStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStatusActionPerformed
         // TODO add your handling code here: Status do cliente iniciado como ativo
-        //txtStatus.setText("Ativo");
+        txtStatus.setText("Ativo");
     }//GEN-LAST:event_txtStatusActionPerformed
 
     private void txtNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeClienteActionPerformed
@@ -1043,17 +1044,17 @@ public class Cadastro extends javax.swing.JFrame {
         Conexao conexao = new Conexao();
         DefaultTableModel tabCliente = (DefaultTableModel) jTableClientes.getModel();
         if (conexao.conectar()) {
-            System.out.println("Conexão com o banco de dados foi estabelecida com sucesso!");
+            //System.out.println("Conexão com o banco de dados foi estabelecida com sucesso!");
 
             // Limpar a tabela antes de adicionar novos dados
             tabCliente.setRowCount(0); // Remove todas as linhas
 
             try {
                 Statement st = conexao.getConnection().createStatement();
-                String sql = "SELECT c.Cod_cliente, c.Status_Cliente, c.nome_cliente, c.Apelido_Cliente, c.Celular, "
+                String sql = "SELECT c.Cod_Cliente, c.Status_Cliente, c.Nome_Cliente, c.Apelido_Cliente, c.Celular, "
                         + "c.Celular_Whatsapp, c.Data_Nasc, c.Estado_Civil, c.Nome_Mae, c.Nome_Pai, c.CPF_Cliente, c.RG_Cliente, "
                         + "c.Cartao_Sus, c.Titulo_Eleitoral, c.Secao_Eleitoral, c.Zona_Eleitoral, c.Data_Cadastro, c.Observacao, "
-                        + "e.id_endereco, e.logradouro, e.bairro, e.complemento, e.cidade, e.CEP, e.uf "
+                        + "e.id_endereco, e.Logradouro, e.Bairro, e.Complemento, e.Cidade, e.CEP, e.UF "
                         + "FROM cliente c "
                         + "JOIN endereco e ON c.id_endereco = e.id_endereco";
 
@@ -1062,9 +1063,9 @@ public class Cadastro extends javax.swing.JFrame {
                 // Adicionar os resultados na jTableCliente
                 while (rs.next()) {
                     Object[] dados = {
-                        rs.getInt("Cod_cliente"),
+                        rs.getInt("Cod_Cliente"),
                         rs.getString("Status_Cliente"),
-                        rs.getString("nome_cliente"),
+                        rs.getString("Nome_Cliente"),
                         rs.getString("Apelido_Cliente"),
                         rs.getString("Celular"),
                         rs.getString("Celular_Whatsapp"),
@@ -1081,12 +1082,12 @@ public class Cadastro extends javax.swing.JFrame {
                         rs.getString("Data_Cadastro"),
                         rs.getString("Observacao"),
                         rs.getInt("id_endereco"),
-                        rs.getString("logradouro"), // Dados de endereço
-                        rs.getString("bairro"),
-                        rs.getString("complemento"),
-                        rs.getString("cidade"),
+                        rs.getString("Logradouro"), // Dados de endereço
+                        rs.getString("Bairro"),
+                        rs.getString("Complemento"),
+                        rs.getString("Cidade"),
                         rs.getString("CEP"),
-                        rs.getString("uf")
+                        rs.getString("UF")
                     };
                     tabCliente.addRow(dados);
                 }
@@ -1145,13 +1146,12 @@ public class Cadastro extends javax.swing.JFrame {
             System.out.println("Não foi possível conectar ao banco de dados.");
         }
 
-        String nome = txtNomeCliente.getText() ;
+        String nome = txtNomeCliente.getText();
         nome = capitalizarCliente(nome);
-        
+
         ClienteDAO addCli = new ClienteDAO();
         //addCli.adicionarCliente(cliente, endereco);
-        
-        
+
         // Obter o ID do cliente selecionado
         /*
          // TODO add your handling code here: Atualizar os campos
@@ -1251,6 +1251,16 @@ codigo anterior antes do acima
 
     private void btnSalvarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarCadastroActionPerformed
         // TODO add your handling code here: Salvar no banco de dados
+        int Cod_Cliente = 0;
+        try {
+            if (!txtCodCliente.getText().isEmpty()) {
+                Cod_Cliente = Integer.parseInt(txtCodCliente.getText()); // Pega o texto completo e converte para int
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "COD Cliente deve ser um número");
+            return; // Interrompe o método se ocorrer um erro na conversão
+        }
+        
         String nome = txtNomeCliente.getText().trim();
         String cpf = txtCPF.getText().trim();
 
@@ -1261,19 +1271,19 @@ codigo anterior antes do acima
 
         nome = capitalizarCliente(nome);
         txtNomeCliente.setText(nome);
-     
+
         ClienteDAO clienteDAO = new ClienteDAO();
-       Cliente clienteExistente = clienteDAO.verificarExistencia(cpf, nome);
-       
-       if(clienteExistente != null){
-        JOptionPane.showMessageDialog(this, "Cliente já estar cadastrado. ", "Cliente Existe", JOptionPane.INFORMATION_MESSAGE);
-        return;
-       }
+        Cliente clienteExistente = clienteDAO.verificarExistencia(cpf, nome);
+
+        if (clienteExistente != null) {
+            JOptionPane.showMessageDialog(this, "Cliente já estar cadastrado. ", "Cliente Existe", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
 
         Cliente cliente = new Cliente();
         Endereco endereco = new Endereco();
-        
-                // Preencher dados do cliente
+
+        // Preencher dados do cliente
         //cliente.setId_cliente(Integer.parseInt(jTableClientes));
         cliente.setCod_Cliente(Integer.parseInt(txtCodCliente.getText()));
         cliente.setNome_Cliente(txtNomeCliente.getText());
@@ -1318,29 +1328,28 @@ codigo anterior antes do acima
 
     private void txtCodClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodClienteActionPerformed
         // TODO add your handling code here:
-         Conexao conexao = new Conexao();
-        
-        try {
-    String sql = "INSERT INTO cliente (...) VALUES (...)";
-    
-    // Usa RETURN_GENERATED_KEYS para pegar o id gerado automaticamente
-    PreparedStatement stmt = conexao.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-    
-    // Configura os parâmetros da inserção aqui
-    
-    stmt.executeUpdate();
-    
-    // Obtém o id gerado
-    ResultSet generatedKeys = stmt.getGeneratedKeys();
-    if (generatedKeys.next()) {
-        int idGerado = generatedKeys.getInt(1);
-        txtCodCliente.setText(String.valueOf(idGerado));  // Define o id gerado no campo txtCodCliente
-    }
+        Conexao conexao = new Conexao();
 
-    stmt.close();
-} catch (SQLException e) {
-    e.printStackTrace();
-}
+        try {
+            String sql = "INSERT INTO cliente (...) VALUES (...)";
+
+            // Usa RETURN_GENERATED_KEYS para pegar o id gerado automaticamente
+            PreparedStatement stmt = conexao.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            // Configura os parâmetros da inserção aqui
+            stmt.executeUpdate();
+
+            // Obtém o id gerado
+            ResultSet generatedKeys = stmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int idGerado = generatedKeys.getInt(1);
+                txtCodCliente.setText(String.valueOf(idGerado));  // Define o id gerado no campo txtCodCliente
+            }
+
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_txtCodClienteActionPerformed
 
     private void txtUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUFActionPerformed
@@ -1516,8 +1525,9 @@ codigo anterior antes do acima
 
     private void txtNomeClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeClienteKeyPressed
         // TODO add your handling code here:
+        
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-            txtApelido.requestFocus();
+           txtApelido.requestFocus();
         }
     }//GEN-LAST:event_txtNomeClienteKeyPressed
 
@@ -1670,31 +1680,39 @@ codigo anterior antes do acima
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         // TODO add your handling code here:
         int selectedRow = jTableClientes.getSelectedRow();
-        
-        if (selectedRow == -1){
+
+        if (selectedRow == -1) {
             JOptionPane.showMessageDialog(null, "Por favor selecione um linha para ser excluída! ");
             return;
         }
-        
+
         int confirmacao = JOptionPane.showConfirmDialog(null, "Você deseja realmente EXCLUIR o registro selecionado? ",
                 "Confimação de Exclusão", JOptionPane.YES_NO_CANCEL_OPTION);
-        
-        if(confirmacao != JOptionPane.YES_OPTION){
+
+        if (confirmacao != JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(null, "Exclusão cancelada! ");
             return;
         }
-        
+
         int id = Integer.parseInt(jTableClientes.getValueAt(jTableClientes.getSelectedRow(), 0).toString());
-        
+
         ClienteDAO clienteDAO = new ClienteDAO();
         clienteDAO.inativarCliente(id);
         carregarDadosCliente(id);
         JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso! ");
         limparCampos();
-        
-       
-        
+
+
     }//GEN-LAST:event_btnDeletarActionPerformed
+
+    private void txtCelularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyReleased
+        // TODO add your handling code here: tentei estes 2 metodos não deu certo.
+      /*  if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+        txtCelular_Whatsapp.requestFocus();
+    }
+
+        //txtCelular.transferFocus();  */
+    }//GEN-LAST:event_txtCelularKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1805,6 +1823,8 @@ codigo anterior antes do acima
     private javax.swing.JFormattedTextField txtZonaEleitoral;
     // End of variables declaration//GEN-END:variables
 
+//======================================================================================================================//
+    
     public void limparCampos() {
         txtCodCliente.setText("");
         txtStatus.setText("");
@@ -1831,6 +1851,8 @@ codigo anterior antes do acima
         txtCidade.setText("");
     }
 
+//======================================================================================================================//
+    
     // Declarando o JComboBox do estado civil
     public void atualizarDados() {
         // Verifica se alguma linha está selecionada
@@ -1891,20 +1913,22 @@ codigo anterior antes do acima
         }
     }
 
+//======================================================================================================================//
+    
     public void ResultadoFiltro() {
         Conexao conexao = new Conexao();
 
         // Tente conectar ao banco de dados
         if (conexao.conectar()) {
-            System.out.println("Conexão com o banco de dados foi estabelecida com sucesso!");
+            //System.out.println("Conexão com o banco de dados foi estabelecida com sucesso!");
 
             try {
                 // Crie o statement e execute a consulta com JOIN entre cliente e endereco
                 Statement st = conexao.getConnection().createStatement();
-                String sql = "SELECT c.Cod_cliente, c.Status_Cliente, c.nome_cliente, c.Apelido_Cliente, c.Celular, "
+                String sql = "SELECT c.Cod_cliente, c.Status_Cliente, c.Nome_Cliente, c.Apelido_Cliente, c.Celular, "
                         + "c.Celular_Whatsapp, c.Data_Nasc, c.Estado_Civil, c.Nome_Mae, c.Nome_Pai, c.CPF_Cliente, c.RG_Cliente, "
                         + "c.Cartao_Sus, c.Titulo_Eleitoral, c.Secao_Eleitoral, c.Zona_Eleitoral, c.Data_Cadastro, c.Observacao, "
-                        + "e.id_endereco, e.logradouro, e.bairro, e.complemento, e.cidade, e.cep, e.uf "
+                        + "e.id_endereco, e.Logradouro, e.Bairro, e.Complemento, e.Cidade, e.CEP, e.UF "
                         + "FROM cliente c "
                         + "JOIN endereco e ON c.id_endereco = e.id_endereco";
 
@@ -1936,12 +1960,12 @@ codigo anterior antes do acima
                     jTextAreaOBS.setText(rs.getString("Observacao"));
 
                     // Preencher campos do endereço
-                    txtEndereco.setText(rs.getString("logradouro"));
-                    txtBairro.setText(rs.getString("bairro"));
-                    txtComplemento.setText(rs.getString("complemento"));
-                    txtCidade.setText(rs.getString("cidade"));
-                    txtCEP.setText(rs.getString("cep"));
-                    txtUF.setText(rs.getString("uf"));
+                    txtEndereco.setText(rs.getString("Logradouro"));
+                    txtBairro.setText(rs.getString("Bairro"));
+                    txtComplemento.setText(rs.getString("Complemento"));
+                    txtCidade.setText(rs.getString("Cidade"));
+                    txtCEP.setText(rs.getString("CEP"));
+                    txtUF.setText(rs.getString("UF"));
                 }
 
             } catch (SQLException e) {
@@ -1975,12 +1999,14 @@ codigo anterior antes do acima
         }
     }
 
+//======================================================================================================================//
+    
     public void FiltroEndereco() {
         Conexao conexao = new Conexao();
 
         // Tente conectar ao banco de dados
         if (conexao.conectar()) {
-            System.out.println("Conexão com o banco de dados foi estabelecida com sucesso!");
+            //System.out.println("Conexão com o banco de dados foi estabelecida com sucesso!");
 
             // Realize uma consulta simples para testar a comunicação
             try {
@@ -2007,7 +2033,9 @@ codigo anterior antes do acima
         }
         //limparCampos();
     }
-
+    
+//======================================================================================================================//
+    
     public String capitalizarCliente(String cliente) {
         // Divide o texto em palavras usando espaço como delimitador
         String[] palavras = cliente.split(" ");

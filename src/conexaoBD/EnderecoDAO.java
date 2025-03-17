@@ -36,7 +36,7 @@ public class EnderecoDAO {
     
     // Método para buscar Endereço pelo ID
     public boolean atualizarEndereco(Endereco endereco, int idEndereco) {
-    String sql = "UPDATE endereco SET logradouro = ?, complemento = ?, bairro = ?, cidade = ?, cep = ?, uf = ? WHERE id_endereco = ?";
+    String sql = "UPDATE endereco SET Logradouro = ?, complemento = ?, bairro = ?, cidade = ?, cep = ?, uf = ? WHERE id_endereco = ?";
     
     try (PreparedStatement stmt = conn.prepareStatement(sql)) {
         stmt.setString(1, endereco.getLogradouro());
@@ -68,12 +68,12 @@ public class EnderecoDAO {
         if (rs.next()) {
             endereco = new Endereco();
             endereco.setId_endereco(rs.getInt("id_endereco"));
-            endereco.setLogradouro(rs.getString("logradouro"));
-            endereco.setComplemento(rs.getString("complemento"));
-            endereco.setBairro(rs.getString("bairro"));
-            endereco.setCidade(rs.getString("cidade"));
-            endereco.setCep(rs.getString("cep"));
-            endereco.setUf(rs.getString("uf"));
+            endereco.setLogradouro(rs.getString("Logradouro"));
+            endereco.setComplemento(rs.getString("Complemento"));
+            endereco.setBairro(rs.getString("Bairro"));
+            endereco.setCidade(rs.getString("Cidade"));
+            endereco.setCep(rs.getString("CEP"));
+            endereco.setUf(rs.getString("UF"));
         }
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Erro ao buscar endereço: " + e.getMessage());

@@ -316,6 +316,7 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here: Tela Cadasdro
         Cadastro telaCadastro = new Cadastro();
         telaCadastro.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCadastroActionPerformed
 
     private void btnAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendaActionPerformed
