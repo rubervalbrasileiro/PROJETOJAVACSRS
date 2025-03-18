@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/jpg" href="/css/img/RS.jpg">
+        <title>Lista</title>
+        <link rel="stylesheet" href="/css/estilo.css">
+
+    <center>
+
+        <a href="/home">Página Inicial</a>
+        <a href="/cliente/cadastro">Cadastro</a>
+        <a href="/cliente/lista">Lista de Cadastro</a>
+        <a href="/quem-somos">Quem Somos</a>
+        <a href="/contato">Contato</a>
+    </center>
+</head>
+<body>
+    <h1>Lista de Cadastro</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>E-mail</th>
+                <th>Editar</th>
+                <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cliente : ${clientes}">
+                <td th:text=" ${cliente.id}"></td>
+                <td th:text=" ${cliente.nome}"></td>
+                <td th:text=" ${cliente.cpf}"></td>
+                <td th:text=" ${cliente.email}"></td>
+                <td>
+                    <a th:href="@{/cliente/alterar/{id}(id=${cliente.id})}"><button>Editar</button></a>
+                </td>
+                <td>
+                    <a th:href="@{/cliente/excluir/{id}(id=${cliente.id})}"><button>Excluir</button></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+<center><a href="/cliente/cadastro">Cadastra novo Cliente</a></center>
+<!-- <a href="/cliente/cadastro"><button>Voltar</button></a> -->
+<button onclick="window.history.back()">Voltar</button>
+
+<footer class="bg-dark text-light py-3">
+    <center>
+        <div class="social-links">
+            <a href="https://whatsapp.com" target="_blank">
+                <img src="/css/img/whatsapp.png" alt="Whatsapp" width="40">
+            </a>
+            <a href="https://instagram.com" target="_blank">
+                <img src="/css/img/instagram.png" alt="Instagram" width="40">
+            </a>
+            <a href="https://twitter.com" target="_blank">
+                <img src="/css/img/twitter.png" alt="Twitter" width="40">
+            </a>
+            <a href="https://linkedin.com" target="_blank">
+                <img src="/css/img/linkedin.png" alt="LinkedIn" width="40">
+            </a>
+                <a href="https://youtube.com
+                   " target="_blank">
+                    <img src="/css/img/youtube.png" alt="Youtube" width="40">
+                </a>
+                <div class="container text-center">
+                    <p>Olinda-PE, Brasil,
+                        csrs@yahoo.com.br
+                        &copy; 2025 CSRS. Todos os direitos reservados.</p>
+                </div>
+        </div>
+    </center>
+</footer>
+</body>
+</html>

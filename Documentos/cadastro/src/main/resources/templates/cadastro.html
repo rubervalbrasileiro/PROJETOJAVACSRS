@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/jpg" href="/css/img/RS.jpg">
+        <title>Cadastro</title>
+        <link rel="stylesheet" href="/css/estilo.css">
+
+    <center>
+
+        <a href="/home">Página Inicial</a>
+        <a href="/cliente/cadastro">Cadastro</a>
+        <a href="/cliente/lista">Lista de Cadastro</a>
+        <a href="/quem-somos">Quem Somos</a>
+        <a href="/contato">Contato</a>
+    </center>
+</head>
+<body>
+<center><h1>Cadastro de Usuário</h1></center>
+<hr>
+<form id="clienteForm" method="post" th:action="@{/cliente/atualizar/{id}(id=${cliente.id})}">
+    <input type="hidden" id="id" name="id" th:value="${cliente.id}">
+
+    <label for="nome">Nome Completo:</label>
+    <p><input type="text" id="nome" name="nome" th:value="${cliente.nome}" required></p>
+
+    <label for="cpf">Digite seu CPF:</label>
+    <p><input type="text" id="cpf" name="cpf" th:value="${cliente.cpf}" required></p>
+
+    <label for="email">Digite seu e-mail:</label>
+    <p><input type="text" id="email" name="email" th:value="${cliente.email}"></p>
+
+    <button type="submit" th:formaction="@{/cliente/grava}">Cadastrar | Atualizar</button>
+    <button type="button" onclick="limparFormulario()">Limpar</button>
+    <button onclick="window.history.back()">Voltar</button>
+</form>
+
+<footer class="bg-dark text-light py-3">
+    <center>
+        <div class="social-links">
+            <a href="https://whatsapp.com" target="_blank">
+                <img src="/css/img/whatsapp.png" alt="Whatsapp" width="40">
+            </a>
+            <a href="https://instagram.com" target="_blank">
+                <img src="/css/img/instagram.png" alt="Instagram" width="40">
+            </a>
+            <a href="https://twitter.com" target="_blank">
+                <img src="/css/img/twitter.png" alt="Twitter" width="40">
+            </a>
+            <a href="https://linkedin.com" target="_blank">
+                <img src="/css/img/linkedin.png" alt="LinkedIn" width="40">
+            </a>
+            <a href="https://youtube.com
+               " target="_blank">
+                <img src="/css/img/youtube.png" alt="Youtube" width="40">
+            </a>
+            <div class="container text-center">
+                <p>Olinda-PE, Brasil,
+                    csrs@yahoo.com.br
+                    &copy; 2025 CSRS. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </center>
+</footer>
+<script>
+    function setAction(action) {
+        document.getElementById('clienteForm').action = action;
+    }
+</script>
+    
+</body>
+</html>
